@@ -86,7 +86,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   {% if template contains 'index' %}
     {{ 'instafeed.js' | asset_url | script_tag }}
 	{% endif %}
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
 
 
@@ -489,8 +489,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           autoplay: true,
           autoplaySpeed: 5000,
           appendArrows: $(".arrows"),
-          prevArrow: '<button class="arrow arrow-left"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.23 154.57"><defs><style>.cls-1{fill:#fff;opacity:0.7;}</style></defs><path class="cls-1" d="M6.11,82.31C4.34,78.7,4.22,75.78,6,72.11,6.33,71.48,39.2,3.27,39.2,3.27A1.8,1.8,0,1,0,36,1.71S3.7,68.9,2.32,71.72C.47,75.5.37,78.6,2.25,82.42c3.66,7.47,33.71,70,33.71,70a1.8,1.8,0,1,0,3.24-1.55Z"/></svg></button>',
-          nextArrow: '<button class="arrow arrow-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.23 154.57"><defs><style>.cls-1{fill:#fff;opacity:0.7;}</style></defs><path class="cls-1" d="M34.16,82.31c1.77-3.61,1.89-6.53.09-10.2C33.94,71.48,1.06,3.27,1.06,3.27A1.8,1.8,0,1,1,4.31,1.71S36.56,68.9,38,71.72c1.85,3.78,1.95,6.88.07,10.7-3.67,7.47-33.71,70-33.71,70a1.79,1.79,0,0,1-1.63,1,1.76,1.76,0,0,1-.77-.17,1.8,1.8,0,0,1-.85-2.4Z"/></svg></button>'
+          prevArrow: '<button class="arrow arrow-left" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.23 154.57"><defs><style>.cls-1{fill:#fff;opacity:0.7;}</style></defs><path class="cls-1" d="M6.11,82.31C4.34,78.7,4.22,75.78,6,72.11,6.33,71.48,39.2,3.27,39.2,3.27A1.8,1.8,0,1,0,36,1.71S3.7,68.9,2.32,71.72C.47,75.5.37,78.6,2.25,82.42c3.66,7.47,33.71,70,33.71,70a1.8,1.8,0,1,0,3.24-1.55Z"/></svg></button>',
+          nextArrow: '<button class="arrow arrow-right" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.23 154.57"><defs><style>.cls-1{fill:#fff;opacity:0.7;}</style></defs><path class="cls-1" d="M34.16,82.31c1.77-3.61,1.89-6.53.09-10.2C33.94,71.48,1.06,3.27,1.06,3.27A1.8,1.8,0,1,1,4.31,1.71S36.56,68.9,38,71.72c1.85,3.78,1.95,6.88.07,10.7-3.67,7.47-33.71,70-33.71,70a1.79,1.79,0,0,1-1.63,1,1.76,1.76,0,0,1-.77-.17,1.8,1.8,0,0,1-.85-2.4Z"/></svg></button>'
         });
       }
     })(jQuery)

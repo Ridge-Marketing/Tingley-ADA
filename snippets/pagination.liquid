@@ -4,7 +4,7 @@
   {{ 'general.pagination.showing_items' | t }} {{ paginate.current_offset | plus: 1 }}-{% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} {{ 'general.pagination.of' | t }} {{ paginate.items }}.</span>
   <div class="clear"></div>
   {% if paginate.previous %}
-    {{ '<i class="fa fa-angle-left" aria-hidden="true"></i>' | link_to: paginate.previous.url }}
+    {{ '<i class="fa fa-angle-left" aria-hidden="true"></i>' | link_to: paginate.previous.url | link_to_type: aria-label: 'Previous Page' }}
   {% endif %}
   {% for part in paginate.parts %}
     {% if part.is_link %}
@@ -18,6 +18,6 @@
     {% endif %}
   {% endfor %}
   {% if paginate.next %}
-    {{ '<i class="fa fa-angle-right" aria-hidden="true"></i>' | link_to: paginate.next.url }}
+    {{ '<i class="fa fa-angle-right" aria-hidden="true"></i>' | link_to: paginate.next.url | link_to_type: aria-label: 'Next Page' }}
   {% endif %}
 </div>
