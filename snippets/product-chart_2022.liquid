@@ -1,0 +1,41 @@
+{%- assign chart_page_slug = false -%}
+{%- for tag in product.tags -%}
+  {%- assign tag_parts = tag | split: '-' -%}
+  {%- if tag_parts[0] == 'modal' -%}
+    {%- assign chart_page_slug = tag | replace_first: 'modal-', '' -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if chart_page_slug %}
+  <div class="product-chart">
+
+    <div id="{{ section.id }}__chart"
+         class="product-chart__chart lity-hide"
+         style="background: #fff"></div>
+
+    <script>
+
+      $(document).ready(function () {
+
+        var $chartContainer = $('#{{ section.id }}__chart');
+        var $chartLink = $('.size-chart--link');
+
+
+        $.get('/pages/{{chart_page_slug}}')
+          .done(function (data) {
+            $page = $(data).filter('#PageContainer');
+          	$content = $page.find('[data-page-content]');
+          	
+            if ($content.length == 1) {
+              $chartContainer.html('<div style="padding: 40px">' + $content.html() + '</div>');
+            }
+          });
+
+
+      });
+
+    </script>
+
+  </div>
+
+{%- endif -%}

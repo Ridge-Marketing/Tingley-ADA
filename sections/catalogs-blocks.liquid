@@ -1,0 +1,116 @@
+<style>
+    .catalog-box {
+      text-align: center;
+      margin: 2rem auto 3rem;
+    }
+
+    .catalog-box a, catalog-box img {
+      display: block;
+    }
+
+    .catalog-box p a {
+      padding-top: 1rem;
+    }
+
+    .catalog-box p a {
+      font-size: 22px;
+      color: #e81e2b;
+    }
+  
+    @media screen and (min-width: 768px) {
+      .catalog-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -1rem;
+        justify-content: space-between;
+      }
+
+      .catalog-box {
+        max-width: calc(33% - 2rem);
+        margin: 2rem 1rem;
+        flex: 1;
+      }
+
+      .catalog-box--image-wrap {
+        position: relative;
+        padding-top: 130%;
+      }
+
+      .catalog-box--image-wrap a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      .catalog-box--image-wrap img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+
+    @media screen and (min-width: 1024px) {
+      .catalog-row {
+        margin: 0;
+      }
+
+      .catalog-box {
+        margin: 2rem;
+        max-width: calc(33% - 4rem);
+      }
+    }
+</style>
+<div class="catalog-row">
+  {% for block in section.blocks %}
+    <div class="catalog-box">
+      <div class="catalog-box--image-wrap">
+        <a href="{{ block.settings.link_url }}" target="_blank">
+          {{ block.settings.featured_image | image_url: height: 480 | image_tag }}
+        </a>
+      </div>
+      <p class="h1">
+        <a href="{{ block.settings.link_url }}" target="_blank">{{ block.settings.link_title }}</a>
+      </p>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Catalogs Blocks",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "featured_image",
+            "label": "Featured image"
+          },
+          {
+            "type": "text",
+            "id": "link_title",
+            "label": "Link title"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link Url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

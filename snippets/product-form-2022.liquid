@@ -1,0 +1,158 @@
+{% assign call_to_action = 'products.product.add_to_cart' | t %}
+{% assign compare_price = current_variant.compare_at_price | money %}
+
+{% unless current_variant.available %}
+  {% assign call_to_action = 'products.product.sold_out' | t %}
+{% endunless %}
+
+{%- for tag in product.tags -%}
+  {%- assign tag_parts = tag | split: '-' -%}
+  {%- if tag_parts[0] == 'modal' -%}
+    <div class="hasTag" style="display:none;">{{ tag }}</div>
+  {%- endif -%}
+{%- endfor -%}
+
+{% form 'product', product, id: "AddToCartForm", class: "product_form", data-product-form:product_form_config %}
+<script class="product-json" type="application/json">
+    {{ product | json }}
+  </script>
+  <!-- form content -->
+<div class="price-wrapper" style="display:block">
+    <span class="product-price" itemprop="price">
+      <span style="font-family: nunito sans; font-size: 25px; color: #EA1821; display: inline-block; margin: 0; font-weight:600;" class="money">{{ current_variant.price | money }}</span>
+    </span>
+    
+      <span style="display:inline-block" class="was">
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <span class="money">{{ compare_price }}</span>
+        {% endif %}
+      </span>
+    
+</div>
+
+    {% unless product.metafields.b1_product_info.fit == nil or product.metafields.b1_product_info.fit == 'null' %} 
+        {%  if product.metafields.b2_product_info.spec.value == "null" %}
+    		<p style="display:block;" class="product--fit-type">Fit: {{product.metafields.b1_product_info.fit | remove: 'null'}}</p>
+        {% else %}
+          <p class="product--fit-type">Fit: {{product.metafields.b1_product_info.fit | remove: 'null'}}</p>
+        {% endif %}
+	{% endunless %}	
+
+  <div class="product--specs">
+    <div style="display:inline-block;" class="spec--wrapper">
+      {{product.metafields.b2_product_info.spec | remove: 'null'}}
+    </div>
+    <div class="arrow hide--desktop size-chart--wrapper">
+      <a href="#{{ section.id }}__chart" data-lity="true" class="product--link-small">SIZE CHART </a>
+    </div>
+  </div>
+  
+  <select id="product-select-{{ product.id }}" name="id" class="single-option-selector product-select" onchange="getSelectedValue()">
+    {% for variant in product.variants %}	
+    <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" {% if variant == current_variant %}selected="selected"{% endif %}>
+      {{ variant.title }} - {{ variant.price | money }}{% if variant.available == false %} - Out of Stock{% endif %}
+    </option>	
+    {% endfor %}
+  </select>
+
+  {% if product.available %}
+    <div id="product-add">
+      <div class="quantity-select"></div>
+
+      {% if section.settings.show_payment_button %}<div class="clear"></div>{% endif %}
+      <input style="height: 40px; line-height: normal; display: inline-block; text-transform: uppercase; border-radius: 6px !important; background-color: #EA1821; width: 210px !important; font-family: nunito sans; font-size: 14px; font-weight: 900;" type="submit" name="button" class="add clearfix AddtoCart{% if section.settings.show_payment_button %} secondary-button{% endif %}" value="{{ call_to_action }}" {% unless current_variant.available %}disabled{% endunless %} />
+      {% if section.settings.show_payment_button %}
+       {{ form | payment_button }}
+      {% endif %}
+      <div class="product--specs" style="margin-top: 1rem;">
+        <p style="margin-top: 5px; display:inline-block; color: #4A4A4A; font-size: 16px;">Usually Ships Within 1-2 Days</p>
+      </div>
+
+      <div class="sku" style="margin: 1rem 0;">
+        <p style="font-weight: bold; font-size: 13px; margin-bottom: 0;">{{ 'customer.order.details.sku' | t }}:</p> <span class="variant_sku">{{ current_variant.sku }}</span>
+      </div><div class="clear"></div>
+
+    </div>
+  {% else  %}
+    <div style="clear: left;">
+      <div class="sku" style="margin: 1rem 0;">
+        <p style="font-weight: bold; font-size: 13px; margin-bottom: 0;">{{ 'customer.order.details.sku' | t }}:</p> <span class="variant_sku">{{ current_variant.sku }}</span>
+      </div><div class="clear"></div>
+    </div>
+  {% endif %}
+
+
+{% endform %}
+
+<div id="upper-desc--wrapper" style="max-width: 450px; font-family: nunito sans; font-size: 16px; color: #4A4A4A;">
+  {{product.metafields.b3_product_info.summary}}
+</div>
+
+<script>
+
+    $(document).ready(function() {
+      let elements = document.querySelectorAll(".single-option-selector"); 
+
+      if ($('.hasTag').text().length < 1) {
+        $('.size-chart--wrapper').each(function() {
+          $(this).hide();
+        });
+      } else {
+          //ensure that size chart button is fixed next to size dropdown
+          let sizechart= `<div class="size-chart--wrapper arrow hide--mobile-inline"><a href="#{{ section.id }}__chart" data-lity="true" style="padding-left: 1rem; font-size: 14px; text-decoration: underline; color: #4A4A4A; font-weight: 900;">SIZE CHART</a></div>`;
+          $('.selector-wrapper:first').append(sizechart);
+      }
+
+      //HTML for a dropdown quantity select for single option products, and input for multiple option products
+      let qtyInput= `<label for="quantity">{{ 'products.product.quantity' | t }}</label>
+        <input min="1" type="number" id="quantity" name="quantity" value="1" />`;
+
+      
+      let qtyDropDown= `<select class="single-option-selector" name="quantity" id="quantity-0" >
+            {% for i in (1..10) %}
+                     <option value="{{ i }}">QTY {{ i }}</option>
+             {% endfor %}         
+        </select>`;  
+        
+        //determine which selector to use based on options length ## Aaron on Sep 16 2022: elements[1] throws error because length is 1. Why is this needed?
+         // if (elements.length > 0 && elements[0].length === elements[1].length) {
+        if (elements.length > 2) {
+          $('.quantity-select').append(qtyDropDown);       
+        } else {
+          $('.quantity-select').append(qtyInput);
+          
+          // Aaron added on Sep 16 2022 to hide the product option dropdown when there's only one option
+          if ($('#product-select-{{ product.id }} option').length < 2) {
+            $('#product-select-{{ product.id }}').hide()
+          }
+        }
+
+      //Make sure products out of stock display as such
+        (function check_stock() {
+          var container = $('[data-section-id]')[0];
+            var product = document.querySelector(".product-json").innerHTML,
+            product = JSON.parse(product || '{}');
+  
+            // conditional only applies to <select> tags on products with ONE option type (ie: size, color, etc.)
+            // number of options in select will only be equal if theres ONE option type
+            
+          // AARON REMOVED Sep 16 2022: if (elements.length > 0 && elements[0].length === elements[1].length) {
+          if (elements.length === 2 && elements[0].length === elements[1].length) {
+              for (i=0; i < product.variants.length; i++) {
+                //adds out of stock message in dropdown
+                let displayedText= elements[0][i].innerHTML;
+                let hiddenText = false;
+                
+                if (elements[1]) {
+                 hiddenText= elements[1][i].innerHTML;
+                }
+                
+                if (hiddenText && hiddenText.includes("Out of Stock")) {
+                   let updatedText= displayedText + ' - Out of Stock';
+                    elements[0][i].innerHTML= updatedText;
+                }  
+              }
+            }
+        })();      
+    })
+  </script>

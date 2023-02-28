@@ -1,0 +1,65 @@
+<div style="max-width: 1135px; margin: 0 auto; text-align: center;">
+  <h1>{{ page.title }}</h1>
+  <div style="margin-bottom: 30px;">
+  {{ page.content }}
+  </div>
+  <a {{ section.settings.ga_tracking_basic }} href="{{ section.settings.infographic_pdf_basic }}" style="max-width: 800px; margin: 0 auto; display: block;" target="_blank"><img  src="{{ section.settings.infographic_thumbnail_basic | img_url: 'master' }}" alt=""></a>
+  
+  <div class="btn-row infographic-btn-row">
+    <a href="{{ section.settings.infographic_pdf_basic }}" {{ section.settings.ga_tracking_basic }} target="_blank" class="btn">Download Guide</a>
+    <a href="{{ section.settings.featured_btn_collection_basic }}" class="btn">{{ section.settings.featured_btn_text_basic }}</a>
+  </div>
+  <div class="infographic-content">
+    {{ section.settings.page_content }}
+  </div>
+
+
+{% schema %}
+  {
+    "blocks": [
+      {
+        "type": "infographic_collections",
+        "name": "Infographic Collections",
+        "settings": [
+          {
+            "id": "info_collection",
+            "type": "collection",
+            "label": "Collection"
+          }
+        ]
+      }
+    ],
+	"settings": [
+		{
+      	  "type": "image_picker",
+          "id": "infographic_thumbnail_basic",
+          "label": "Infographic Thumbnail"
+        },
+        {
+			"type": "url",
+          "id": "infographic_pdf_basic",
+          "label": "Infographic PDF"
+        },
+		{
+			"type": "url",
+          "id": "featured_btn_collection_basic",
+          "label": "Featured Button Collection"
+        },
+		{
+			"type": "text",
+          "id": "featured_btn_text_basic",
+          "label": "Featured Button Text"
+        },
+		{
+			"type": "richtext",
+			"id": "page_content_basic",
+			"label": "Page Content"
+		},
+        {
+			"type": "text",
+          "id": "ga_tracking_basic",
+          "label": "Google Tracking Code"
+        }
+      ]
+  }
+{% endschema %}

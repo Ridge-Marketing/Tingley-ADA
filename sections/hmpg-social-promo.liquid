@@ -1,0 +1,53 @@
+ <section  class="homepage-section index-section homepage-intro social-promo" data-section-id="{{ section.id }}" >
+   <span class="anchor" id="ambassador"></span>
+  <div class="row">
+    <div class="desktop-6 tablet-6 mobile-12 social-content">
+      <div>
+      <h2>Show Us Your</h2>
+      <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/tingley-toughness_b8cafd0a-d0e8-459b-9ce3-08d593be6e28.png?v=1586376798" style="max-width: 410px;width:100%;" alt="Tingley Toughness">
+      <p>We want to see you in your go-to gear getting dirty and getting it done.</p>
+        <p><b>Tag your photos <span style="color: #EA1821;">#TingleyTough</span> and if we repost one, you’ll get a free t-shirt.</b></p>
+        <p><span style="font-weight:normal;">Not on social media?</span></p>
+        <a href="#social-form" class="btn btn--primary js-social-form">SUBMIT YOUR PHOTO</a>
+      </div>
+    </div>
+    <div class="desktop-6 tablet-6 mobile-12 text-center social-photo">
+            <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/social-photo-group.png?v=1586358825" alt="Tingley Toughness">
+    </div>
+  </div>
+  <div style="display: none;" style="max-width: 600px;" id="social-form">
+    <div id="wufoo-pjkh7k01gnac7r" style=" max-width: 600px; padding: 20px;">
+Fill out my <a href="https://tingleyrubber.wufoo.com/forms/pjkh7k01gnac7r">online form</a>.
+</div>
+<script type="text/javascript">var pjkh7k01gnac7r;(function(d, t) {
+var s = d.createElement(t), options = {
+'userName':'tingleyrubber',
+'formHash':'pjkh7k01gnac7r',
+'autoResize':true,
+'height':'560',
+'async':true,
+'host':'wufoo.com',
+'header':'show',
+'ssl':true};
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'secure.wufoo.com/scripts/embed/form.js';
+s.onload = s.onreadystatechange = function() {
+var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+try { pjkh7k01gnac7r = new WufooForm();pjkh7k01gnac7r.initialize(options);pjkh7k01gnac7r.display(); } catch (e) {}};
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script>
+
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Home Social Promo",
+    "settings": [],
+"presets":[
+      {
+       "name":"Homepage Social",
+       "category":"Text"
+      }
+   ]
+  }
+{% endschema %}

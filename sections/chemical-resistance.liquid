@@ -1,0 +1,55 @@
+<div style="margin-top: 0px;">
+    <div class="icon-group" style="border-top: 1px solid #e5e5e5; margin-bottom: 75px;">
+        <h2 style="font-size: 28px; padding-top: 75px;" class="nunito-extrabold sm-text-center">Chemical Resistance</h2>
+        <div class="lg-grid">
+          {% for block in section.blocks %}
+          <div class="indv-icon">
+  
+            <div>
+              <h3 class="nunito-extrabold sm-text-center" style="font-size: 20px;">{{block.settings.icon-heading}}</h3>
+              <p class="nunito sm-text-center">{{block.settings.icon-desc}}</p>
+              <a target="_blank" style="font-size: 14px; display: inline-block; text-decoration: underline; color: #4a4a4a; font-weight: 900; text-transform: uppercase;" href={{block.settings.btn-link}}>View PDF</a><i style="font-weight: 900; color: #545454; padding-left: 8px;" class="fa-solid fa-chevron-right"></i>
+            </div>
+  
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Chemical Resistance",
+      "settings": [],
+      "blocks": [
+      {
+        "type": "Indicator",
+        "name": "Indicator",
+        "settings": [
+        {
+          "id": "btn-link",
+          "type": "url",
+          "label": "Button Link"
+        },
+        {
+          "id": "icon-heading",
+          "type": "text",
+          "label": "Indicator Heading"
+        },
+        {
+          "id": "icon-desc",
+          "type": "text",
+          "label": "Indicator Description"
+        }     
+        ]
+      }
+      
+      ],
+      "presets": [
+        {
+          "name": "Chemical Resistance",
+          "category": "Custom"
+        }
+      ]
+    }
+  {% endschema %}

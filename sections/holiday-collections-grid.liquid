@@ -1,0 +1,48 @@
+<h2 style="font-family: 'Helvetica Neue'; font-size: 28px; font-weight: 900; text-transform: uppercase;">{{section.settings.heading}}</h2>
+<div style="display:grid; grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin: 25px auto 80px;">
+  {% for block in section.blocks %}
+    <div>
+    <a style="text-decoration-color: rgb(235, 26, 33);" href="{{block.settings.link}}">
+      <div style="text-align:center;">
+          <img alt="{{block.settings.image.alt | escape}}" src="{{ block.settings.image | img_url: 'master' }}" style="object-fit: cover;"/>
+      </div>
+        <p style="font-size: 20px; color: rgb(235, 26, 33); font-family: 'Harmonia Sans'; font-weight: bold; margin-bottom: 8px;">{{block.settings.main_text}}</p> 
+    </a>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Holiday Grid",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Grid Item",
+        "settings": [
+          {
+            "label": "Image",
+            "id": "image",
+            "type": "image_picker"
+          }, {
+            "label": "Main Text",
+            "id": "main_text",
+            "type": "text"
+          }, {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

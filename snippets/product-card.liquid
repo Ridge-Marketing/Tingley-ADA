@@ -1,0 +1,14 @@
+<div class="product-card--container swiper-slide">
+        <div style="display:flex; flex-direction: column; justify-content: space-between; height: 100%;">
+              <div class="product-card--img">
+                  <a href={{product.url}}>
+                      <img style="margin: 0 auto; height: 100%; object-fit: cover;" src={{product.featured_image.src | img_url: 'large'}} alt='{{product.title}} image' />
+                  </a>
+              </div>
+                  <p class="product-card--price">{{product.price | money }}</p>
+                  <a style="flex-grow: 1;" href={{product.url}}>
+                      <p class="product-card--title">{{ product.title }}</p>
+                  </a>
+                  <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" style="display: inline-block; text-decoration: underline; color: #545454;">{{ product.metafields.stamped.badge }}</span>
+        </div>
+</div>

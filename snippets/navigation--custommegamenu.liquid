@@ -1,0 +1,217 @@
+<nav id="nav" class="gridlock-fluid">
+  <div class="row">
+    <div id="navigation" class="row">
+      <ul id="nav" class="desktop-12 mobile-3">
+        {% assign menu = linklists[section.settings.main_nav] %}
+      		{% for link in menu.links %}
+        		<li><a href="{{ link.url }}">{{ link.title }}</a>
+<!--         <ul class="submenu">
+        				{% for sub_link in link.links %}
+          					<li class="has_sub_menu" aria-haspopup="true" aria-expanded="false"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+             				{% if sub_link.links != blank %}
+            				<ul class="nested">
+              					{% for sub_sub_link in sub_link.links %}
+              					<li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              					{% endfor %}
+            				</ul>
+                            {% endif %}
+          					</li>
+          				{% endfor %}
+        			</ul> -->
+        </li>
+					
+        	{% endfor %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<nav id="nav" {% if section.settings.full_width_header %} class="gridlock-fluid"{% endif %}>
+  {% if section.settings.full_width_header %}<div class="row">{% endif %}
+  <div id="navigation" class="row">
+    <ul id="nav" class="desktop-12 mobile-3">
+      {% assign menu = linklists[section.settings.main_nav] %}
+      {% for link in menu.links %}
+
+      {% if meganav %}
+      {{ megalink }}
+      <!-- End megamenu & start multi column where needed -->
+      {% elsif link.links != blank %}
+        <!-- How many links to show per column -->
+        {% assign num = section.settings.linklist_breakpoint | plus:0 %}
+        <!-- How many links in this list -->
+        {% assign numx = linklists[link.handle].links.size %}
+        <!-- Number of links divided by number per column -->
+        {% assign numy = numx | divided_by: num %}
+        <!-- Modulo balance of total links divided by links per column -->
+        {% assign mod = numx | modulo:num %}
+        <!-- Calculate the modulo offset -->
+        {% assign mod_offset = numx | minus:mod %}
+
+        {% comment %}
+        {{ num }} chosen number of links per column
+        {{ numx }} number of links in the linklist
+        {{ numy }} Columns needed
+        {{ mod }}  Balance for last column
+        {{ mod_offset }} links to offset before adding mod
+        {% endcomment %}
+
+      <!-- Start math for calculated multi column dropdowns -->
+      <li class="dropdown has_sub_menu" aria-haspopup="true" aria-expanded="false">{{ link.title | link_to: link.url }}
+        {% if link.links.size > num %}
+		      
+        
+        
+        
+        
+        
+        
+        
+        
+        {% assign numx2 = num | times: 2 %}
+{% assign numx3 = num | times: 3 %}
+<ul class="megamenu">
+  <div class="mega-container">
+    <span class="desktop-12 tablet-6">
+      {% assign mega = 0 %}
+      {% assign mega = mega | plus: 1 %}
+      {% if numy >= 2 %}{% assign mega = mega | plus: 1 %}{% endif %}
+      {% if numy >= 3 %}{% assign mega = mega | plus: 1 %}{% endif %}
+      {% if mod > 0 %}{% assign mega = mega | plus: 1 %}{% endif %}
+      {% if mega > 0 %}
+      <!-- Start Megamenu Inner Links -->
+      <li class="desktop-{{ 12 | divided_by: mega }}">
+        <ul class="mega-stack">
+          {% for sub_link in link.links limit: num %}
+          <li class="sub_link"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+            {% if sub_link.links != blank %}
+            <ul class="nested">
+              {% for sub_sub_link in sub_link.links %}
+              <li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% if numy >= 2 %}
+      <li class="desktop-{{ 12 | divided_by: mega }}">
+        <ul class="mega-stack">
+          {% for sub_link in link.links limit: num offset: num %}
+          <li class="sub_link"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+            {% if sub_link.links != blank %}
+            <ul class="nested">
+              {% for sub_sub_link in sub_link.links %}
+              <li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if numy >= 3 %}
+      <li class="desktop-{{ 12 | divided_by: mega }}">
+        <ul class="mega-stack">
+          {% for sub_link in link.links limit: num offset: numx2 %}
+          <li class="sub_link"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+            {% if sub_link.links != blank %}
+            <ul class="nested">
+              {% for sub_sub_link in sub_link.links %}
+              <li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if numy >= 4 %}
+      <li class="desktop-{{ 12 | divided_by: mega }}">
+        <ul class="mega-stack">
+          {% for sub_link in link.links limit: num offset: numx3 %}
+          <li class="sub_link"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+            {% if sub_link.links != blank %}
+            <ul class="nested">
+              {% for sub_sub_link in sub_link.links %}
+              <li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if mod > 0 %}
+      <li class="desktop-{{ 12 | divided_by: mega }}">
+        <ul class="mega-stack">
+          {% for sub_link in link.links limit: num offset: mod_offset %}
+          <li class="sub_link"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+            {% if sub_link.links != blank %}
+            <ul class="nested">
+              {% for sub_sub_link in sub_link.links %}
+              <li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% endif %}
+    </span>
+  </div>
+</ul>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- if the list is less than the chosen number -->
+        {% else %}
+        <ul class="submenu">
+        {% for sub_link in link.links %}
+          <li class="has_sub_menu" aria-haspopup="true" aria-expanded="false"><a href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+             {% if sub_link.links != blank %}
+            <ul class="nested">
+              {% for sub_sub_link in sub_link.links %}
+              <li><a href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      <!-- stop doing the math -->
+      {% else %}
+      <li>{{ link.title | link_to: link.url }}</li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% if section.settings.full_width_header %}</div>{% endif %}
+</nav>

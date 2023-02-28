@@ -1,0 +1,56 @@
+{% if settings.instagram_id != blank %}
+    <li>
+      <a title="Link to Instagram" aria-label="Link to Instagram" href="//instagram.com/{{ settings.instagram_id }}" target="_blank">
+        <i class="fa fa-instagram fa-2x"></i>
+      </a>
+    </li>
+{% endif %}
+{% if settings.facebook_url != blank %}
+  <li>
+    <a title="Link to Facebook" aria-label="Link to Facebook" href="{{ settings.facebook_url }}" target="_blank">
+      <i class="fa fa-facebook fa-2x"></i>
+    </a>
+  </li>
+{% endif %}
+
+{% if settings.twittername != blank %}
+  <li>
+    <a title="Link to Twitter" aria-label="Link to Twitter" href="{{ settings.twittername }}" target="_blank">
+      <i class="fa fa-twitter fa-2x"></i>
+    </a>
+  </li>
+{% endif %}
+
+{% if settings.pinterest_url != blank %}
+  <li>
+    <a title="Link to Pinterest" aria-label="Link to Pinterest" href="{{ settings.pinterest_url }}" target="_blank">
+      <i class="fa fa-pinterest fa-2x"></i>
+    </a>
+  </li>
+{% endif %}
+
+{% if settings.tumblr_url != blank %}
+  <li>
+    <a title="Link to Tumblr" aria-label="Link to Tumblr" href="{{ settings.tumblr_url }}" target="_blank">
+      <i class="fa fa-tumblr fa-2x"></i>
+    </a>
+  </li>
+{% endif %}
+
+{% if settings.youtube_url != blank %}
+  <li>
+    <a title="Link to Youtube" aria-label="Link to Youtube" href="{{ settings.youtube_url }}" target="_blank">
+      <i class="fa fa-youtube fa-2x"></i>
+    </a>
+  </li>
+{% endif %}
+
+{% if settings.googleplus_url != blank %}
+  <li>
+    <a title="Link to Google Plus" aria-label="Link to Google Plus" href="{{ settings.googleplus_url }}" target="_blank">
+      <i class="fa fa-google-plus fa-2x"></i>
+    </a>
+  </li>
+{% endif %}
+
+

@@ -1,0 +1,126 @@
+{% capture product_form_config %}
+          { "money_format": {{ shop.money_format | json }},
+            "enable_history": true,
+            "currency_switcher_enabled": true,
+            "sold_out": {{ "products.product.sold_out" | t | json }},
+            "button": {{ 'products.product.add_to_cart' | t | json }},
+            "unavailable": {{ 'products.product.unavailable' | t | json }}
+          }
+        {% endcapture %}
+  <div class="col-row">
+  <div class="col w-50">
+    <h3 class="text-center sync-col-header">Liners</h3>
+  
+  
+  {% for product in liners.products %}
+  <div class="flex config-product" data-section-type="product-section" data-product-handle="{{ product.handle }}">
+    <div class="product-img"><img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" alt=""></div>
+    <div class="product-content">
+    
+    
+  	{% form 'product', product, id: "AddToCartForm", class: "product_form", data-product-form:product_form_config %}
+    
+    	<script class="product-json" type="application/json">
+    		{{ product | json }}
+  		</script>
+      <h3>{{ product.title }}</h3>
+        <div class="select" style="display: none;">
+          <select id="product-select-{{ product.id }}" name='id'>
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
+                {{ variant.title }} - {{ variant.price | money }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        {% for option in product.options_with_values %}
+          {% include "swatch" %}
+        {% endfor %}
+      {% include 'product-chart' %}
+    
+    	{% assign current_variant = product.selected_or_first_available_variant %}
+    	{% assign price = current_variant.price | money_with_currency %}
+	    {% assign compare_price = current_variant.compare_at_price | money_with_currency %}
+  
+  		<div class="flex justify-between product-meta">
+        <div id="product-price">
+          <span class="meta-eyebrow">PRICE</span>
+          <span class="product-price" itemprop="price">
+            <span class="money">{{ price }}</span>
+          </span>
+        </div>
+		<div class="sku">
+    		<label class="meta-eyebrow">{{ 'customer.order.details.sku' | t }}:</label> <span class="variant_sku">{{ current_variant.sku }}</span>
+  		</div>
+      </div><div class="clear"></div>
+		<input type="submit" name="button" class="add clearfix AddtoCart{% if section.settings.show_payment_button %} secondary-button{% endif %}" value="Add to Cart" />
+      <div>      <div role="button" class="remove-item plain-btn" data-product="{{ product.handle }}"><i class="fa fa-times-circle-o"></i> <span style="text-decoration: underline;">Remove Item</span></div></div>
+	{% endform %}
+    </div>
+  </div>
+{% endfor %}
+  </div>
+  <div class="col w-50">
+    <h3 class="text-center sync-col-header">Shells</h3>
+    
+  
+  {% for product in shells.products %}
+  <div class="flex config-product" data-section-type="product-section" data-product-handle="{{ product.handle }}">
+    
+    <div class="product-img"><img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" alt=""></div>
+    <div class="product-content">
+      
+  	{% form 'product', product, id: "AddToCartForm", class: "product_form", data-product-form:product_form_config %}
+    <script class="product-json" type="application/json">
+      {{ product | json }}
+    </script>
+      <h3>{{ product.title }}</h3>
+        <div class="select" style="display: none;">
+          <select id="product-select-{{ product.id }}" name='id'>
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
+                {{ variant.title }} - {{ variant.price | money }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        {% for option in product.options_with_values %}
+          {% include "swatch" %}
+        {% endfor %}
+      {% include 'product-chart' %}
+   
+		{% assign current_variant = product.selected_or_first_available_variant %}
+    	{% assign price = current_variant.price | money_with_currency %}
+	    {% assign compare_price = current_variant.compare_at_price | money_with_currency %}
+  
+  
+        <div class="flex justify-between product-meta">
+        <div id="product-price">
+          <span class="meta-eyebrow">PRICE</span>
+          <span class="product-price" itemprop="price">
+            <span class="money">{{ price }}</span>
+          </span>
+        </div>
+		<div class="sku">
+    		<label class="meta-eyebrow">{{ 'customer.order.details.sku' | t }}:</label> <span class="variant_sku">{{ current_variant.sku }}</span>
+  		</div>
+      </div><div class="clear"></div>
+		<input type="submit" name="button" class="add clearfix AddtoCart{% if section.settings.show_payment_button %} secondary-button{% endif %}" value="Add to Cart" />
+		<div>      
+          <div role="button" class="remove-item plain-btn" data-product="{{ product.handle }}"><i class="fa fa-times-circle-o"></i> <span style="text-decoration: underline;">Remove Item</span></div></div>
+	{% endform %}
+    </div>
+  </div>
+{% endfor %}
+</div>
+</div>
+
+<div class="flex justify-between shell-btns step-3-actions">
+  <button class="back-to-start plain-btn"><i class="fa fa-arrow-circle-left"></i> BACK TO OPTIONS</button>
+<!--   <button class="js-add-all plain-btn add-all">
+    Add All to cart <i class="fa fa-arrow-circle-right"></i>
+    <div class="tooltip">
+      <p>One or more of your selected products are sold out</p>
+    </div>
+  </button> -->
+</div>

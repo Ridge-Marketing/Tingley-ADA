@@ -1,0 +1,64 @@
+<div id="article-loop" class="desktop-9 tablet-6 mobile-3">
+      
+      <div class="article-index" id="article-{{ article.id }}" data-alpha="{{ article.title }}">
+        {% for article in blog.articles  %}
+        	{% assign img_url = article.image | img_url: '400x400', crop: 'center' %}
+        <div class="article-info">
+		
+          <div class="article-info-inner blog-landing-flex">
+            <div class="article-info-img">
+              {% if article.image %}
+              <a href="{{ article.url }}">
+                <img class="lazyload lazyload-fade"
+      				id="{{ imageid }}"
+      				data-src="{{ img_url }}"
+      				alt="{{ article.image.alt | escape }}">
+              </a>
+            {% endif %}
+            </div>
+            <div class="article-info-content">
+               <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            {% assign published_at = article.published_at | date: format: 'month_date_year' %}
+            {% if section.settings.show_date %}<p class="posted">{{ 'blogs.article.posted_on_date_html' | t: date: published_at }}</p>{% endif %}
+              
+              <div class="article-content">
+
+                {% if article.excerpt == blank %}
+                {{ article.content | strip_html | truncatewords: 50 }}
+                {% else %}
+                {{ article.excerpt }}
+                {% endif %}
+              </div>
+
+            <div class="readmore">
+              <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+            </div>
+            </div>
+           
+          </div>
+     	</div>
+      {% endfor %}
+    </div>
+</div>
+<div class="desktop-3 tablet-hide mobile-3">
+  <div class="sidebar-box">
+    <h2>Top Sellers</h2>
+    {% assign best = collections["best-selling-products"] %}
+    <ul id="posts">
+      {% for product in best.products limit:5 %}
+      	{% assign prod_img_url = product.featured_image | img_url: '60x60', crop: 'center' %}
+      <li>
+        <a href="{{ product.url }}">
+          <span>
+            <img class="lazyload lazyload-fade"
+      				id="{{ imageid }}"
+      				data-src="{{ prod_img_url }}"
+      				alt="{{ product.image.alt | escape }}">
+          </span>
+          <span>{{ product.title }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

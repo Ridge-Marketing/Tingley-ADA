@@ -1,0 +1,101 @@
+<div data-section-id="{{ section.id }}" class="collection-template--farm-ag" data-section-type="collection-page">
+  <div class="">
+    <div class="desktop-7 tablet-3">
+      <div>
+        <p class="collections-intro">{{ section.settings.intro_text }}</p>
+        <div style="margin: 2rem 0;max-width: 544px;">
+          <img alt="{{ section.settings.intro_callout.alt | escape }}" src="{{ section.settings.intro_callout | image_url: width: 1000 }}" />
+        </div>
+      </div>
+    </div>
+    <div class="desktop-5 tablet-3">
+      <div>
+        <img alt="{{ section.settings.intro_image.alt | escape }}" src="{{ section.settings.intro_image | image_url: width: 507 }}" />
+      </div>
+    </div>
+  </div>
+    <div class="clear"></div>
+  <div id="collection-description" class="desktop-12" style="width: 100%;">
+    <h1 class="subcollections-title">{{ section.settings.subcollections_title }}</h1>
+  </div>
+
+  <div class="clear"></div>
+  <div id="product-loop">
+    {% assign products-per-row = section.settings.products_per_row %}
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <div id="listing-{{ block.settings.collection.id }}" class="product-index desktop-3 mobile-half">
+          <a style="text-decoration-color: rgb(235,26,33);" href="{{ block.settings.collection.url }}">
+            {% if block.settings.image_override %}
+              <img src="{{ block.settings.image_override | image_url: width: 400 }}" alt="" />
+            {% else %}
+              <img src="{{ block.settings.collection.featured_image | image_url: width: 400 }}" alt="" />
+            {% endif %}
+            <div class="product-info">
+              {% if block.settings.title_override != blank %}
+                <h3 style="font-size: 20px; color: rgb(235, 26, 33); font-family: 'Harmonia Sans'; font-weight: bold; margin-bottom: 8px;">{{ block.settings.title_override }}</h3>
+              {% else %}
+                <h3 style="font-size: 20px; color: rgb(235, 26, 33); font-family: 'Harmonia Sans'; font-weight: bold; margin-bottom: 8px;">{{ block.settings.collection.title }}</h3>
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      {{ page.content }}
+    {% endif %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Farm & AG Collection",
+    "max_blocks":4,
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "intro_text",
+        "label": "Intro Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "intro_callout",
+        "label": "Intro Callout"
+      },
+      {
+        "type": "image_picker",
+        "id": "intro_image",
+        "label": "Intro Image"
+      },
+      {
+        "type": "text",
+        "id": "subcollections_title",
+        "label": "Subcollections Title"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"collection_block",
+        "name":"Collection Block",
+        "settings":[
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "title_override",
+            "label": "Title Override"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_override",
+            "label": "Image Override"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

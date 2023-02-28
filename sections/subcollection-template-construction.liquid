@@ -1,0 +1,281 @@
+{% if collection.title == 'Safety Rainwear'  %}
+  <div id="page" class="desktop-12 tablet-6 mobile-3" data-section-id="{{ section.id }}">
+    <h1>Rainwear</h1>
+    <div class="rte" style="padding-bottom: 10px;margin-bottom: 20px;">
+      Our 100% waterproof rainwear keeps you dry and keeps you comfortable so you can stay at it all day long. We offer rain jackets and rain suits for every application from all-purpose wear, to higher level protection from industrial, flame resistant, high visibility and premium recreation options.
+    </div>
+    <style>
+      <!--
+      @media(max-width: 740px) {
+        h2 {
+          border-bottom: 1px solid #f2f2f2;
+        }
+      }
+    -->
+    </style>
+    <div class="product-row">
+      <div class="product-index desktop-3 tablet-2 mobile-full">
+        <a href="https://www.tingleyrubber.com/collections/all-purpose-rainwear">
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/storm-champ-2-piece_400x400_crop_top.png?v=1619037647" alt="">
+          <div class="product-info">
+            <h3>All-Purpose</h3>
+          </div>
+        </a>
+      </div>
+      <div class="product-index desktop-3 tablet-2 mobile-full">
+        <a href="https://www.tingleyrubber.com/collections/industrial-rainwear">
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/products/J22257_A_400x400_crop_center.jpg?v=1566922295" alt="">
+          <div class="product-info">
+            <h3>Industrial</h3>
+          </div>
+        </a>
+      </div>
+      <div class="product-index desktop-3 tablet-2 mobile-full">
+        <a href="https://www.tingleyrubber.com/collections/flame-resistant-rainwear">
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/products/J44241_A_2cb40320-96b2-44e4-8cf3-2baffd251ada_400x400_crop_center.jpg?v=1541776666" alt="">
+          <div class="product-info">
+            <h3>Flame Resistant</h3>
+          </div>
+        </a>
+      </div>
+      <div class="product-index desktop-3 tablet-2 mobile-full">
+        <a href="https://www.tingleyrubber.com/collections/high-visibility-rainwear">
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/products/J24122C_C_400x400_crop_center.jpg?v=1576101198" alt="">
+          <div class="product-info">
+            <h3>High Visibility Rainwear</h3>
+          </div>
+        </a>
+      </div>
+      <div class="product-index desktop-3 tablet-2 mobile-full">
+        <a href="https://www.tingleyrubber.com/collections/recreation-rainwear">
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/products/J33117_A_400x400_crop_center.jpg?v=1540914980" alt="">
+          <div class="product-info">
+            <h3>Premium Recreation</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+{% else %}
+
+  <div data-section-id="{{ section.id }}" class="collection-template" data-section-type="collection-page">
+
+    {% case section.settings.grid %}
+      {% when 2 %}
+        {%- assign grid_item_width = 'desktop-6 tablet-3 mobile-half' -%}
+      {% when 3 %}
+        {%- assign grid_item_width = 'desktop-4 tablet-2 mobile-half' -%}
+      {% when 4 %}
+        {%- assign grid_item_width = 'desktop-3 tablet-2 mobile-half' -%}
+    {% endcase %}
+
+    {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+    {% paginate collection.products by product_limit %}
+
+      <div id="collection-description" class="desktop-12 mobile-3">
+        <h1>{{ collection.title }}
+        </h1>
+        <div class="rte">
+          {{ collection.description | remove: "[banner]" }}
+        </div>
+      </div>
+
+      <div class="clear"></div>
+
+
+      <div id="full-width-filter" class="desktop-12 tablet-6 mobile-3">
+        {% if collection.id != 76835192890  %}
+          {% include 'filter' %}
+        {% endif %}
+      </div>
+
+
+      {% if section.blocks.size > 0 %}
+        {% include 'collection-sidebar' %}
+      {% endif %}
+
+
+      {% if collection.id == 76835192890  %}
+        {% assign liners = collections['sync-system-liners'] %}
+        {% assign shells = collections['sync-system-shells'] %}
+        <div style="margin: 0 1.04166667%;">
+          <h3 style="padding-bottom: 5px;margin-bottom: 20px;border-bottom: 1px solid #e5e5e5;">Wear as Liners</h3>
+          <div {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
+            {% for product in liners.products %}
+              <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+                {% include 'product-listing' %}
+              </div>
+            {% endfor %}
+          </div>
+
+          <h3 style="padding-bottom: 5px;margin-bottom: 20px;border-bottom: 1px solid #e5e5e5;">Wear as Shells</h3>
+          <div {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
+            {% for product in shells.products %}
+              <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+                {% include 'product-listing' %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+      {% else %}
+
+        <div id="product-loop" {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
+          {% assign products-per-row = section.settings.products_per_row %}
+          {% if collection.products_count > 0 %}
+            {% for product in collection.products %}
+              <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+                {% include 'product-listing' %}
+              </div>
+            {% endfor %}
+            {% else %}
+            <!--       	<p>This sale has expired. Check back soon for more deals.</p> -->
+          {% endif %}
+        </div>
+        {% if collection.id == 396129992952 %}
+          <div id="collection-description" class="desktop-12 mobile-3" style="margin: 48px 0 64px;">
+            <h1>NEW Tingley Safety Vests</h1>
+            <div class="rte">
+              Tingley® Safety Vests are premium PPE that deliver high-end performance and meet ANSI 107 and CSA Z96 high visibility requirements.
+            </div>
+          </div>
+
+          <div id="product-loop" {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
+            {% assign products-per-row = section.settings.products_per_row %}
+            {% for product in collections['tingley-class-vests'].products %}
+              <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+                {% include 'product-listing' %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% include 'pagination' %}
+      <div style="float:left; width: 100%; text-align: center; margin-bottom: 2rem;">
+        <a class="btn btn--red btn--back" href="/pages/construction/">Back to Construction Collection</a>
+      </div>
+    {% endpaginate %}
+  </div>
+
+
+{% endif %}
+
+
+<script>
+  jQuery(document).ready(function($) {
+
+    let hash = window.location.hash.substring(1);
+
+    if (hash == 'playVideo') {
+      $('.collection-banner.pylon a')[0].click();
+    }
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Collection page",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "collection_banner",
+        "label": "Banner Image"
+      },
+      {
+        "type": "url",
+        "id": "collection_banner_url",
+        "label": "Banner Url"
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "label": "Products per row",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "rows",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "Rows",
+        "default": 4
+      }, {
+        "type": "checkbox",
+        "id": "sort_by",
+        "label": "Show sort by",
+        "default": true
+      }, {
+        "type": "paragraph",
+        "content": "Your customers can filter collections using tags that you have added to your products. [See our setup instructions for these filters](http:\/\/support.undergroundmedia.co.uk\/customer\/en\/portal\/articles\/1348811-filter-collections-with-tags)."
+      }, {
+        "type": "text",
+        "id": "filter_1_title",
+        "label": "Filter 1 title",
+        "default": "Filter by X"
+      }, {
+        "type": "textarea",
+        "id": "sort_a",
+        "label": "Filter 1 tags",
+        "info": "Comma separated"
+      }, {
+        "type": "text",
+        "id": "filter_2_title",
+        "label": "Filter 2 title",
+        "default": "Filter by Y"
+      }, {
+        "type": "textarea",
+        "id": "sort_b",
+        "label": "Filter 2 tags",
+        "info": "Comma separated"
+      }, {
+        "type": "text",
+        "id": "filter_3_title",
+        "label": "Filter 3 title",
+        "default": "Filter by Z"
+      }, {
+        "type": "textarea",
+        "id": "sort_c",
+        "label": "Filter 3 tags",
+        "info": "Comma separated"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "side_nav",
+            "label": "Sidebar menu"
+          }, {
+            "type": "text",
+            "id": "heading",
+            "label": "Menu title",
+            "default": "Explore"
+          }
+        ]
+      }, {
+        "type": "vendor_list",
+        "name": "Vendor list",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "shop_by_designer_title",
+            "label": "Vendor list title",
+            "default": "Shop by Designer"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

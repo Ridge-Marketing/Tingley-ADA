@@ -1,0 +1,13 @@
+<div style="margin-bottom: 80px;">
+  <h1>{{ page.title }}</h1>
+  <div class="rte">
+    {{ page.content | remove: "[banner]" }}
+  </div>
+</div>
+
+<div style="text-align: center;">
+  <h2 style="font-family: 'Helvetica Neue'; font-size: 28px; font-weight: 900; text-transform: uppercase;">Gear for any budget</h2>
+  {% section 'gift-grid'%}
+  {%  section "holiday-collections-grid" %}
+  {%  section "holiday-collections-grid-2" %}
+</div>

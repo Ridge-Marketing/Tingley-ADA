@@ -1,0 +1,101 @@
+
+        <div class="text-center lander-panel-content">
+            <h2>Expanded Use You Control</h2>
+            <p>
+              Strong enough to wear alone and even better together, pair SYNC System<sup>®</sup> liners and shells for endless possibilities in any application.
+            </p>
+        </div>
+        <div class="steps">
+            <div class="steps-inner">
+                <div class="step">
+                    <div class="step__header">
+                        <div class="step__header-text" data-step="1">
+                          <div class="step__header-text--wrapper">
+                            <h3>Choose Your Liner</h3>
+                            <p>Select one or more insulated jackets, sweatshirts and vests for extra warmth and added comfort.</p>
+                          </div>
+                        </div>
+                        <div class="step__header-btn">
+                            <button data-next-step="2" data-step="liners" class="btn js-next-step" disabled>Next ></button>
+                        </div>
+                    </div>
+                    <ul class="step__products flex liners">
+                      {% for product in liners.products %}
+                        <li>
+                            <label>
+                                <input type="checkbox" value="{{ product.handle }}" name="liner">
+                                <div class="product-info">
+                                    <figure>
+                                        <div class="image-holder">
+                                            <img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" alt="">
+                                            <div class="description is-hidden">
+                                                <button class="plain-btn js-close-description"><i class="fa fa-times"></i></button>
+                                                <p>{{ product.description | strip_html | truncatewords: 30 }}</p>
+                                            </div>
+                                        </div>
+                                        <figcaption>
+                                            {{ product.title }} <button class="plain-btn information js-show-description"><i class="fa fa-info-circle"></i></button>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </label>
+                        </li>
+                      {% endfor %}
+                        
+                    </ul>
+                  <div class="flex sm-justify-center justify-end items-center">
+
+                        <div class="step__header-btn">
+                            <button data-next-step="2" data-step="liners" class="btn js-next-step" disabled>Next ></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step__header">
+                        <div class="step__header-text" data-step="2">
+                          <div class="step__header-text--wrapper">
+                            <h3>Select a Shell</h3>
+                           	<p>Select one or more waterproof and breathable jackets of the same size as your liner.</p>
+                          </div>
+                        </div>
+                        <div class="step__header-btn">
+                            <button data-next-step="3" data-step="shells" class="btn js-next-step" disabled>Assemble</button>
+                        </div>
+                    </div>
+                    <ul class="step__products flex shells">
+                        {% for product in shells.products %}
+                        <li>
+                            <label>
+                                <input type="checkbox" value="{{ product.handle }}" name="liner">
+                                <div class="product-info">
+                                    <figure>
+                                        <div class="image-holder">
+                                            <img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" alt="">
+                                            <div class="description is-hidden">
+                                                <button class="plain-btn js-close-description"><i class="fa fa-times"></i></button>
+                                                <p>{{ product.description | strip_html | truncatewords: 30 }}</p>
+                                            </div>
+                                        </div>
+                                        <figcaption>
+                                            {{ product.title }} <button class="plain-btn information js-show-description"><i class="fa fa-info-circle"></i></button>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </label>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    <div class="flex justify-between shell-btns items-center">
+                         <div class="step__header-btn">
+                                <button data-prev-step="1" class="btn js-prev-step">Back to Liners</button>
+                             </div>
+                        <div class="step__header-btn">
+                          
+                            <button data-next-step="3" data-step="shells" class="btn js-next-step" disabled>Assemble</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        

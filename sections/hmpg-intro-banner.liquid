@@ -1,0 +1,97 @@
+<section id="homepage-intro-banner" class="homepage-section homepage-intro index-section" data-section-id="{{ section.id }}" >
+  <div class="row bucket-links">
+    <div class="desktop-6 tablet-6 mobile-3 text-center">
+      <div class="bucket-link">
+        <a href="https://www.tingleyrubber.com/pages/shop-footwear" style="max-width:637px;">Shop Footwear</a>
+      	<img alt="Tingley Boots in action" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Shop_Boots-Winter_23_1.jpg?v=1673027508"/>
+      </div>
+    </div>
+    <div class="desktop-6 tablet-6 mobile-3 text-center">
+      <div class="bucket-link">
+        <a href="https://www.tingleyrubber.com/pages/shop-clothing" style="max-width:636px;">Shop Clothing</a>
+        <img alt="Tingley High Visibility Jacket in action" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Shop_Clothing-Winter_23_1.jpg?v=1673027508"/>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="">
+      {% if section.settings.banner_image %}
+    <div class="desktop-12 tablet-6 mobile-3">
+      <div style="margin:20px 0">
+       {% if section.settings.banner_link %} <a href="{{ section.settings.banner_link }}"> {% endif %}
+          <img class="lazyload"
+            src="{{ section.settings.banner_image | img_url: 'master' }}"
+            data-src="{{ img_url }}"
+            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+            data-aspectratio="{{ section.settings.banner_image.aspect_ratio }}"
+            data-sizes="auto"
+            data-parent-fit="cover"
+            style=""
+            alt="{{ section.settings.banner_image.alt | escape }}">
+       {% if section.settings.banner_link %} </a> {% endif %}
+      </div>
+    </div>
+      {% endif %}
+  </div>
+  <div class="row">
+
+    <div class="desktop-12 tablet-6 mobile-3">
+<img alt="Tingley: 125 Years, est. 1896" style="margin-top:30px;margin-left:auto;margin-right:auto;display:block;" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Tingley-125Year-Logo_VERT-REV.png"/>
+      {% if section.settings.heading != blank %}
+        <h2 class="section-heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+
+      <div class="pages-content">
+          <div class="rte text-center">
+            {{ section.settings.rich_text }}
+          </div>
+      </div>
+      <div class="text-center">
+        <!--<a href="https://www.tingleyrubber.com/pages/about-us" class="easteregg-link">
+     	 &nbsp;
+        </a>-->
+        <a href="https://www.tingleyrubber.com/pages/about-us" class="btn btn--primary" style="height:38px;">
+     	 About Tingley
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Homepage Intro Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Welcome"
+    },
+    {
+      "type": "richtext",
+      "id": "rich_text",
+      "label": "Text",
+      "info": "Use basic HTML to format text",
+      "default": "<p>Use this section to tell customers about your store or add content from one of your pages which makes it easy to add images, video or any other content.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    },
+	{
+      "id": "banner_link",
+      "type": "url",
+      "label": "Banner button link"
+    }
+   ],
+   "presets":[
+      {
+       "name":"Homepage Intro Banner",
+       "category":"Text"
+      }
+   ]
+}
+{% endschema %}

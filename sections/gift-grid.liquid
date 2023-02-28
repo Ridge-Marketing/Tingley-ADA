@@ -1,0 +1,48 @@
+<div class="holiday-gift-grid">
+  {% for block in section.blocks %}
+    <div class="{% unless forloop.last %}giftBorder{%endunless%}">
+      <div style="text-align:center; margin-bottom: 2rem;">
+        <a href="{{block.settings.btn_link}}">
+          <img alt="{{block.settings.image.alt | escape}}" src="{{ block.settings.image | img_url: 'master' }}" />
+        </a>
+      </div>
+      <a style="width: 114px; height: 40px;" href="{{block.settings.btn_link}}" class="btn" id="gift-grid-btn">Shop</a>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Gift Grid",
+    "max_blocks": 5,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Tabbed collections"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Grid Item",
+        "settings": [
+          {
+            "label": "Main Text",
+            "id": "main_text",
+            "type": "text"
+          }, {
+            "label": "Image",
+            "id": "image",
+            "type": "image_picker"
+          }, {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

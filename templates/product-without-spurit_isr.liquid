@@ -1,0 +1,18 @@
+  
+{% comment %}START MAGIC360 INSTALLER BOOKMARK{% endcomment %}
+{% comment %}END MAGIC360 INSTALLER BOOKMARK{% endcomment %}
+{% comment %}
+{% assign Magic360ImageCount = 48 %}
+{% assign disable360 = false %}{% for tag in product.tags %}{% if tag == 'no360' %}{% assign disable360 = true %}{% endif %}{% endfor %}
+{% if product.images.size < Magic360ImageCount or disable360 %}
+{% section 'product-template_original' %}
+{% else %}
+{% section 'product-template' %}
+{% endif %}
+{% endcomment %}
+{% comment %}START MAGIC360 INSTALLER BOOKMARK{% endcomment %}
+{% comment %}END MAGIC360 INSTALLER BOOKMARK{% endcomment %}
+
+<!-- Start Stamped.io Auto Installation-->
+<!-- <div id="stamped-main-widget" class="stamped-main-widget" data-widget-style="standard" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}" data-product-sku="{{product.handle}}">{{ product.metafields.stamped.reviews }}</div> -->
+<!--End Stamped.io Auto Installation -->

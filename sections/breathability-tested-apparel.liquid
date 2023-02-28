@@ -1,0 +1,56 @@
+<div style="margin-top: 0px;">
+    <div class="icon-group" style="border-top: 1px solid #e5e5e5; margin-bottom: 75px;">
+        <h2 style="font-size: 28px; padding-top: 75px;" class="nunito-extrabold sm-text-center">Breathability Tested Apparel</h2>
+        <div class="lg-grid">
+          {% for block in section.blocks %}
+          <div class="indv-icon">
+  
+            <img style="height:100px; width:116px;" src={{block.settings.icon-img}} alt="{{block.settings.icon-heading}}" />
+  
+            <div id="icon-text">
+              <h3 class="nunito-extrabold sm-text-center" style="font-size: 20px;">{{block.settings.icon-heading}}</h3>
+              <p class="nunito sm-text-center">{{block.settings.icon-desc}}</p>
+            </div>
+  
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Breathability Tested",
+      "settings": [],
+      "blocks": [
+      {
+        "type": "Indicator",
+        "name": "Indicator",
+        "settings": [
+        {
+          "id": "icon-img",
+          "type": "url",
+          "label": "Indicator Image"
+        },
+        {
+          "id": "icon-heading",
+          "type": "text",
+          "label": "Indicator Heading"
+        },
+        {
+          "id": "icon-desc",
+          "type": "text",
+          "label": "Indicator Description"
+        }     
+        ]
+      }
+      
+      ],
+      "presets": [
+        {
+          "name": "Breathable Section",
+          "category": "Custom"
+        }
+      ]
+    }
+  {% endschema %}

@@ -1,0 +1,615 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign disable360 = false %}{% for tag in product.tags %}{% if tag == 'no360' %}{% assign disable360 = true %}{% endif %}{% endfor %}
+
+<div itemscope itemtype="http://schema.org/Product"
+  id="product-{{ product.id }}"
+  class="product-page product-template"
+  data-product-id="{{ product.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-section">
+
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: '800x' }}">
+
+  <h1 itemprop="name" class="hide--desktop" style="font-family: nunito sans; font-size: 36px; font-weight: 900; line-height:110%;">
+    {{ product.title }}
+  </h1>
+
+<div style="margin-bottom: 20px;" id="product-photos" class="{% if section.settings.related_products == 'right' %}desktop-5{% else %}desktop-6{% endif %} tablet-3 mobile-3" data-product-gallery>
+      {% if product.images.size < 48 or disable360 %}
+         <div id="imageContainer-2022" style="text-align:center; margin-bottom: 12px; height: 480px; max-height: 480px;">
+      {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+      <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" style="margin: 0 auto; height: 100%; object-fit: contain;" id="featuredProductImg">
+     </div>
+           <div id="Thumbnails" style="margin: 0 auto; display: grid; gap: 8px 0;"> 
+      {% for image in product.images %} 
+        <div style="margin: 0 auto; max-width: 96px; max-height: 96px; width: 96px;">
+        <a href="{{ image.src | img_url: 'large' }}" class="thumbnail-options">
+            <img style="padding: 4px; height: 100%; width: 100%; object-fit: cover;" src="{{ image.src | img_url: 'compact'}}" alt="{{image.alt | escape}}"/>
+        </a>
+        </div>
+      {% endfor %} 
+      </div>
+      {% else %} 
+      <div style="display:none">
+        {%- if product.featured_image -%}
+          {% include 'product-image-gallery' %}
+        {%- else -%}
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>{% include 'magic360' %}
+      {% endif %}
+  </div>
+
+  <div style="margin-bottom: 20px;" id="product-right" class="{% if section.settings.related_products == 'right' %}desktop-7{% else %}desktop-6{% endif %} tablet-3 mobile-3">
+
+    <div id="product-description" {% if section.settings.related_products == 'right' %}class="desktop-10 tablet-6 mobile-3"{% endif %}>
+
+      <h1 itemprop="name" class="hide--mobile" style="font-family: nunito sans; font-size: 36px; font-weight: 900; line-height:110%;">
+        {{ product.title }}
+      </h1>
+      <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" data-product-title="{{product.title}}" data-product-type="{{product.type}}" style="display: inline-block; text-decoration: underline; color: #545454;">{{ product.metafields.stamped.badge }} </span>
+      &nbsp; <span style="color:#ccc;">|</span> &nbsp;
+      <span class="stampedQAs" data-id="{{ product.id }}" style="display: inline-block;" data-type="qna"></span>
+
+
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+        <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+        {% capture product_form_config %}
+          { "money_format": {{ shop.money_format | json }},
+            "enable_history": true,
+            "currency_switcher_enabled": {{ settings.show_multiple_currencies | json }},
+            "sold_out": {{ "products.product.sold_out" | t | json }},
+            "button": {{ 'products.product.add_to_cart' | t | json }},
+            "unavailable": {{ 'products.product.unavailable' | t | json }}
+          }
+        {% endcapture %}
+
+        {% include 'product-form-2022' %}     
+        {% include 'product-chart_2022' %}
+
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="clear"></div>
+
+  <hr />
+
+  <!--  SECTION FOR PRODUCT CARDS BEGINS  -->
+  <section style="padding: 2rem 1rem;">
+    <div class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=5">
+
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        <h1 style="font-weight: 900; margin-bottom: 2rem; font-family: nunito sans">Customers who viewed this product also viewed</h1>
+    
+        <div style="display: flex;">
+            <div class="button-prev"><img class="tw-w-72 lg:tw-w-48 xl:tw-w-32" src="https://cdn.shopify.com/s/files/1/1211/7332/files/chevron-left.png?56" alt="View previous item in slider"></div>
+
+          <div style="padding: 0 1px;" class="swiper-container swiper-container--{{ section.id }}">
+            <div class="swiper-wrapper">
+                {%- for product in recommendations.products -%}
+                  {% include 'product-card' %}
+                {%- endfor -%}
+            </div>
+          </div>
+
+            <div class="button-next"><img class="tw-w-72 lg:tw-w-48 xl:tw-w-32" src="https://cdn.shopify.com/s/files/1/1211/7332/files/chevron-right.png?56" alt="View next item in slider"></div>
+        </div>
+    
+      {%- endif -%}
+    </div>
+  </section>
+  <!--  SECTION FOR PRODUCT CARDS ENDS  -->
+
+        <section class="product--wrapper">
+          {% if product.metafields.c2_promo_banner.image_url.value == nil or product.metafields.c2_promo_banner.image_url.value == 'https://null' %} 
+              <img class="hide--mobile" style="width: 100%;" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TINGLEY-HomeBanner-Free_Ship_50.jpg?v=1677250654" alt="Free Shipping Over $50. Enter code FREESHIP50 at checkout." />
+              <img class="hide--desktop" style="width: 100%;" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TINGLEY-HomeBanner-Free_Ship_50.jpg?v=1677250654" alt="Free Shipping Over $50. Enter code FREESHIP50 at checkout." />
+            {% elsif product.metafields.c1_promo_banner.link_url.value == 'https://null' %} 
+              <img class="hide--mobile" style="width: 100%;" src={{product.metafields.c2_promo_banner.image_url}} alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+              <img class="hide--desktop" style="width: 100%;" src={{product.metafields.c3_promo_banner.image_url_mobile}} alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+            {% else %} 
+              <a href={{product.metafields.c1_promo_banner.link_url}} target="_blank" class="hide--mobile" style=" width: 100%; text-align:center;">
+                <img style="width: 100%;" src={{product.metafields.c2_promo_banner.image_url}} alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+              </a>
+              <a href={{product.metafields.c1_promo_banner.link_url}} target="_blank" class="hide--desktop" style=" width: 100%; text-align:center;">
+                <img style="width: 100%;" src={{product.metafields.c3_promo_banner.image_url_mobile}} alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+              </a>
+          {% endif %}
+
+      {%- assign product_details = product.metafields.d1_product_info.details | metafield_text -%}
+      {% if product_details != 'null' %}
+        <div class="product-details--container">
+          <h3 style="font-size: 24px; line-height: 30px; font-weight: 900; font-family: Nunito Sans; padding-bottom: 8px;">Product Details:</h3>
+          {{product.metafields.d1_product_info.details | remove: 'null'}}
+        </div>
+      {% endif %}
+      </section>
+
+      <hr />
+
+    {%- assign additional_info = product.metafields.f1_product_info.additional | metafield_text -%}
+    {%- assign indicators_url = product.metafields.g1_content.indicators_url.value -%}
+    {%- assign media_url = product.metafields.e2_content.media_url.value -%}
+
+    {% if additional_info != 'null' or indicators_url != 'https://null' or media_url != 'https://null' %}
+      <section class="product--wrapper">
+          
+        <div class="additional-info--container">
+
+          {% if product.metafields.e2_content.media_url and product.metafields.e2_content.media_url.value != 'https://null' %}
+            <div class="additional-info--media">
+              {% if product.metafields.e1_content.isvideo %}
+              <iframe id="{{product.id}}-yt-video" src="{{product.metafields.e2_content.media_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+              {% else %}
+              <a href="{{product.metafields.e2_content.media_url}}" data-lity>
+                <img src={{product.metafields.e2_content.media_url}} alt="Ideal Applications Image" />
+              </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if additional_info != 'null' or indicators_url != 'https://null' %}
+          <div class="additional-info--content">
+            <h3>Additional Information:</h3>
+
+            {% if product.metafields.g1_content.indicators_url and product.metafields.g1_content.indicators_url.value != "https://null" %} 
+            <div style="margin: 32px 0 24px;">
+              <a href="https://www.tingleyrubber.com/pages/performance-indicators" target="_blank">
+                <img width="345" height="110" src={{product.metafields.g1_content.indicators_url}} alt="safety icons" />
+              </a>
+            </div>
+            {% endif %}
+
+             {% if additional_info != 'null' %}
+            	{{product.metafields.f1_product_info.additional | remove: 'null'}} 
+            {% endif %}
+          </div>
+          {% endif %}
+          <div id="widgetTarget" style="visibility: hidden;"></div>
+          
+        </div>
+      </section>
+
+      <hr />
+      {% endif %}
+</div>
+
+<script src="https://unpkg.com/swiper@6.8.2/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper@6.8.2/swiper-bundle.min.js"></script>
+
+<script>
+  //hide unwanted labels added to product dropdowns automatically by shopify
+  (function($){
+    $('.selector-wrapper').find('label').each(function() {
+      $(this).hide();
+    });
+   	$('.product--specs').find('.spec--wrapper').find('a').each(function() {
+      let linkType = $(this).attr('href');
+      let result = linkType.includes(".pdf");
+      if (!result) {
+      	$(this).attr('data-lity', 'true');      
+      }
+    });
+  })(jQuery);
+
+  // add target blank to links generated through metafields in additional content section
+    (function($){
+    $(".additional-info--content, .spec--wrapper").find("a").each(function() {
+      $(this).attr('target','_blank');
+      $(this).closest('p').append('<i style="font-weight: 900; color: #545454; padding-left: 8px;" class="fa-solid fa-chevron-right"></i>');
+    });
+    $("#upper-desc--wrapper, .product-details--container").find("a").each(function() {
+      $(this).attr('target','_blank');
+    });
+      $(document).ready(function() {
+    $(".arrow").find("a").each(function() {
+      $(this).closest('div').append('<i style="font-weight: 900; color: #545454; padding-left: 8px;" class="fa-solid fa-chevron-right"></i>');
+    });
+    });
+  })(jQuery);
+
+//image color is fed in dynamically through imageUpdate() function found in theme file
+  
+//function to switch thumbnail images to featured image
+let $thumbImages= $('#Thumbnails').find('a.thumbnail-options');
+let $productImage= $('#featuredProductImg');
+let $magic360= $('.MagicToolboxContainer');
+let $360thumbnail= $('#thumbnail360');
+
+
+//hide static thumbnail images and show 360 image
+$360thumbnail.on('click', function() {
+  $productImage.hide();
+  $magic360.show();
+});
+
+//following two functions control the image switching for static thumbnail images
+if ($thumbImages.length) {
+    $thumbImages.on('click', function(e) {
+        e.preventDefault();
+        let newImage = $(this).attr('href');
+        switchImage(newImage, null, $productImage);
+        if ($productImage.is(':hidden')) {
+          $magic360.hide();
+          $productImage.show();
+        }
+    })
+}
+function switchImage(src, imgObject, el) {
+    let $el = $(el);
+    $el.attr('src', src);
+}
+
+//this function injects the number of questions asked into the product form link
+//also controls scroll to questions and flips tab from reviews (default) to questions
+//Stamped.io doesn't have a plug-and-play code snippet for number of questions asked
+(function($){
+  let count = $("#tab-questions").attr("data-count");
+  let questionTag;
+  if (count > 1) {
+    questionTag = `${count} answered questions`;
+  } else if (count == 1) {
+    questionTag = "1 answered question"
+  } else {
+    questionTag = "Ask a question";
+  }
+  $("span.stampedQAs").text(questionTag);
+  
+  $(".stampedQAs").on("click", function() {
+    $('html, body').animate({
+        scrollTop: $("#widgetTarget").offset().top
+    }, 1200);
+    $("#tab-questions").click();
+  });
+})(jQuery);
+
+//this code block controls the recommended products section of the page
+//API call hits shopifys recommended products endpoint
+//Response targets product recommendations div and sets recommended products object
+//initialize swiper in .then() statement after object is set or else won't initialize properly
+const handleIntersection = (entries, observer) => {
+    if (!entries[0].isIntersecting) return;
+
+    observer.unobserve(productRecommendationsSection);
+
+    const url = productRecommendationsSection.dataset.url;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          productRecommendationsSection.innerHTML = recommendations.innerHTML;
+        }
+      }).then(() => {
+        //initialize our swiper
+        const swiper = new Swiper('.swiper-container--{{ section.id }}', {
+          spaceBetween: 30,
+          speed: 1500,
+          loop: true, 
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+              slidesPerGroup: 3
+            },
+            1280: {
+              slidesPerView: 4,
+              slidesPerGroup: 4
+            },
+            1536: {
+              slidesPerView: 5,
+              slidesPerGroup: 5,
+              allowTouchMove: false
+            }
+          },
+          autoplay: false,
+          fadeEffect: {
+              crossFade: false,
+          },
+          navigation: {
+            nextEl: ".button-next",
+            prevEl: ".button-prev",
+          },
+        });
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  };
+
+  const productRecommendationsSection = document.querySelector('.product-recommendations');
+  const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+
+  observer.observe(productRecommendationsSection);
+</script>
+
+
+
+<style>
+  div.MagicToolboxSelectorsContainer .magic-thumbnail-selector {
+    height:100px;
+    width:100px;
+  }
+  div.MagicToolboxSelectorsContainer a::after {
+    content: none !important;
+  }
+  {% if section.settings.thumbnails == 'right' %}
+    .thumbnail-gallery {
+      float: right;
+    }
+    .main-image-navigation {
+      left: 10px;
+    }
+  {% endif %}
+  {% if section.settings.thumbnails == 'bottom' and product.images.size > 4 %}
+    .product-thumbnail {
+      width: 100% !important;
+      margin-top: 20px;
+    }
+    .thumbnail-slider .owl-wrapper-outer {
+      z-index: 1 !important;
+      margin: 0 0 0 10px !important;
+      padding-left: 30px !important;
+    }
+    .thumbnail-slider .owl-prev {
+      left: 0px;
+      position: absolute;
+      top: 40%;
+      z-index: 1;
+    }
+    .thumbnail-slider .owl-next {
+      right: 0px;
+      top: 40%;
+      z-index: 1;
+      position: absolute;
+    }
+  {% endif %}
+  {% if section.settings.thumbnails == 'left' %}
+    .product-main-images {
+      float: right !important;
+    }
+  {% endif %}
+  {% if section.settings.related_products == 'right' %}
+    #product-description,
+    .product-description {
+      border-right: 1px solid {{ settings.dotted_color }};
+      padding-right: 20px;
+    }
+  {% endif %}
+  {% if section.settings.show_sku == false %}
+    .variant-sku {
+      display: none;
+    }
+  {% endif %}
+  {% if section.settings.product_variants == 'swatches' %}
+    .selector-wrapper {
+      display: none;
+    }
+
+    .single-option-selector {
+      opacity: 0;
+      display: none;
+    }
+  {% endif %}
+  {% if section.settings.swatch_shape == 'circles' %}
+    .swatch .color label {
+      min-width: 34px !important;
+      width: 34px !important;
+      border-radius: 50%;
+      outline: 0 !important;
+    }
+  {% endif %}
+  {% if product.images.size > 1 %}
+    #product-description .zoom-box {
+      left: 48%;
+    }
+  {% else %}
+    #product-description .zoom-box {
+      left: 57.5%;
+    }
+  {% endif %}
+  {% if template == 'product.quick' %}
+    #product-description {
+      width: 100%;
+      padding: 0;
+      border: none;
+    }
+    #product-description .desc {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    .fancybox-inner {
+     border: 1px solid {{ settings.dotted_color }};
+      }
+    .product-quick-view {
+      width: 810px !important;
+      padding: 20px 0;
+      margin-left: 10px !important;
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product form"
+      },
+      {
+        "type": "checkbox",
+        "id": "vendor",
+        "label": "Show product vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_quantity",
+        "label": "Show quantity"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sku",
+        "label": "Show variant SKU",
+        "default": true
+      },
+      {
+        "type": "radio",
+        "id": "product_variants",
+        "label": "Product variant display",
+        "options": [
+          {
+            "value": "drop-downs",
+            "label": "Drop-downs"
+          },
+          {
+           "value": "swatches",
+           "label": "Swatches"
+          }
+        ],
+        "default": "drop-downs"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_swatch_images",
+        "label": "Show custom swatch images",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "swatch_shape",
+        "label": "Color swatch shape",
+        "options": [
+          {
+            "value": "circles",
+            "label": "Circles"
+          },
+          {
+            "value": "rectangles",
+            "label": "Rectangles"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_button",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)",
+        "default": false
+      },
+{
+        "type": "text",
+        "id": "product_video_embed",
+        "label": "Include a video of the product under the image gallery"
+      },
+      {
+        "type": "header",
+        "content": "Product gallery"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_controls",
+        "label": "Show gallery controls",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "thumbnails",
+        "label": "Thumbnail images position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "zoom_image_position",
+        "label": "Zoom image position",
+        "options": [
+          {
+            "value": "zoom_over_main",
+            "label": "Over top of main image"
+          },
+          {
+            "value": "zoom_on_right",
+            "label": "To right of main image"
+          }
+        ],
+        "default": "zoom_over_main"
+      },
+      {
+        "type": "header",
+        "content": "Additional content"
+      },
+      {
+        "type": "select",
+        "id": "related_products",
+        "label": "Related products position",
+        "options": [
+          {
+            "value": "none",
+            "label": "Do not show"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ]
+      },
+      {
+        "type": "page",
+        "id": "popup_one",
+        "label": "Popup 1 content"
+      },
+      {
+        "type": "page",
+        "id": "popup_two",
+        "label": "Popup 2 content"
+      },
+      {
+        "type": "page",
+        "id": "popup_three",
+        "label": "Popup 3 content"
+      },
+      {
+        "type": "checkbox",
+        "id": "popup_four",
+        "label": "Popup contact form",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social",
+        "label": "Show social share icons",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

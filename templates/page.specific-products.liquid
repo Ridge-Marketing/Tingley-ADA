@@ -1,0 +1,96 @@
+{% layout 'theme.full_width' %}
+  {% assign liners = collections["sync-system-liners"] %}
+  {% assign shells = collections["sync-system-shells"] %}
+
+<div class="lander-full sync-system-builder">
+<div class="lander-hero" style="position: relative;">
+  <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 1;">
+    <video src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Sync_System_Builder_Hero-2Mb.mp4?v=1634676055" muted autoplay playsinline loop style="object-fit: cover; width: 100%; height: 100%;"></video>
+  </div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="col-row justify-end">
+      
+      <div class="col w-50 lander-hero-content">
+        <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/SYNC_System-Logo-2C.png?v=1634676093" alt="" style="max-width: 261px;">
+        <h1>Build Your<br>Do-it-all Jacket</h1>
+        <p><strong>SYNC System<sup>®</sup> outerwear is a full range of interchangeable jackets, sweatshirts and vests strong enough to wear alone or combined to combat the toughest conditions.</strong></p>
+        <div class="hero-btn-row">
+      		<a href="#build" class="btn btn--red" tabindex="-1">Build Your Jacket</a>
+          	<a id="video-link" class="btn btn--white fancybox-media" href="https://www.youtube.com/watch?v=pkv7ohQwZO0" tabindex="-1">Watch Video</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="lander-panel lander-img-bg sync-flexibility">
+    <div class="container">
+      <div class="text-center lander-panel-content">
+	      <h2>Function Meets Flexibility</h2>
+        <p>Connect any SYNC System<sup>&reg;</sup> liner and shell <u>of the same size</u> for the ultimate temperature, precipitation, work and play versatility.</p>
+      </div>
+      <div class="col-row text-center">
+        <div class="col w-50">
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/SYNC-Funtionality-Jackets.png?v=1634740806" alt="">
+        </div>
+        <div class="col w-25 sync-feature">
+          <h3>Anchor Points</h3>
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/SYNC-Functionality-1-Anchor.png?v=1635341753" alt="">
+          <p><strong>Secure the neck and cuffs</strong></p>
+        </div>
+        <div class="col w-25 sync-feature">
+          <h3>Interior Zippers</h3>
+          <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/SYNC-Funtionality-2-Zipper.png?v=1634740806" alt="">
+          <p><strong>Integrate two layers as one</strong></p>
+        </div>
+      </div>
+      <p>
+    </div>
+  </div>
+  <div class="lander-panel product-guide" style="position:relative;">
+    <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 1;">
+      <img src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/SYNC_system-homehero-background.jpg?v=1634676129" style="object-fit: cover; width: 100%; height: 100%;">
+    </div>
+    <div class="container" style="position:relative;z-index:2;">
+      <div class="lander-panel-content product-guide__content">
+      	<h2>Mix and Match More Options</h2>
+        <p>Workers get three jackets when buying two, and pick their perfect all-season protection.</p>
+        <a href="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Tingley_Sync_System_Product_Guide.pdf?v=1635254956" class="btn btn--red" target="_blank">Get Product Guide</a>
+      </div>
+    </div>
+  </div>
+<div class="lander-panel sync-steps selections" id="build">
+  
+    <div class="container">
+      <div class="assembley-line">
+        <div class="assembley-line-inner ">
+        <div class="station">
+		  {% include 'configSteps' %}
+        </div>
+        <div class="station">
+      		<div class="container">
+             <div class="text-center lander-panel-content">
+               <h2>Your Sync System<sup>&reg;</sup></h2>
+               
+               <p><strong>SYNC System<sup>&reg;</sup> liners and shells <u>must be the same size to properly connect</u> together.</strong></p>
+               <p>For each item you’ve selected, choose the appropriate size and add to cart individually. <br/>
+In your cart, you can adjust quantities as needed.</p>
+              </div>
+          		{% include 'configAddCart' %}
+            </div>    
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+<script>
+  $( document ).ready(function() {
+    var hash = window.location.hash;
+
+    
+    if (hash == '#playVideo') {
+		$('#video-link').trigger('click');
+    }
+  });
+</script>

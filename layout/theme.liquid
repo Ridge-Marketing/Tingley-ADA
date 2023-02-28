@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+{% include 'booster-seo' %}
+{% include 'geolizr-init' %}
+{% include 'limespot' %}
+  <meta charset="utf-8" />
+	<meta name="facebook-domain-verification" content="ecqirgbavbzgxooncy6do11bd6wfh4" />
+  <!-- Add any tracking or verification meta content below this line -->
+  <!-- Facebook or Google Analytics tracking should be placed in your Online store > Preferences and not your theme -->
+
+  <!-- Meta content
+================================================== -->
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PJ7FZMK');</script>
+<!-- End Google Tag Manager -->
+
+  <!-- Tingley WOC 2023 Pixel -->
+  <script async src='https://tag.simpli.fi/sifitag/91ebd610-b54a-0137-5b02-06659b33d47c'></script>
+
+
+  {% comment %}<title>
+    {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>{% endcomment %}
+  {% if page_description %}
+  {% comment %}<meta name="description" content="{{ page_description | escape }}" />{% endcomment %}
+  {% endif %}
+  
+  {% if collection.metafields.custom.canonical_tag.value %}
+  	<link rel="canonical" href="{{ collection.metafields.custom.canonical_tag.value }}" />
+  {% else %}
+  	<link rel="canonical" href="{{ canonical_url }}" />
+  {% endif %}
+  
+
+  {% include 'social-media-meta-tags' %}
+
+  <!-- CSS
+================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;700;900&display=swap" rel="stylesheet"> 
+<script src="https://kit.fontawesome.com/7d8600c646.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper@6.8.2/swiper-bundle.min.css">
+  {{ 'stylesheet.css' | asset_url | stylesheet_tag }}
+  {{ 'devstyles.css' | asset_url | stylesheet_tag }}
+  {{ 'font-awesome.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {{ 'queries.css' | asset_url | stylesheet_tag }}
+  {{ 'vendor.lity.min.css' | asset_url | stylesheet_tag }}
+  
+
+  <!-- Typography
+================================================== -->
+
+  {% include 'google-fonts' %}
+
+  <!-- JS
+================================================== -->
+
+  {{'//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' | script_tag }}
+
+  {% comment %}
+  Replace old package with new
+  {{ "//unpkg.com/eventemitter3@latest/umd/eventemitter3.min.js" | script_tag }}
+  {% endcomment %}
+  {{ 'eventemitter3.js' | asset_url | script_tag }}
+  
+
+  {%- if settings.show_multiple_currencies -%}
+    {% include 'currencies' %}
+  {%- endif -%}
+
+  {{ 'theme.js' | asset_url | script_tag }}
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {{ 'jquery.fs.shifter.js' | asset_url | script_tag }}
+  {{ 'vendor.lity.min.js' | asset_url | script_tag }}
+  {% if template contains 'index' %}
+    {{ 'instafeed.js' | asset_url | script_tag }}
+	{% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+
+
+  <!-- Favicons
+================================================== -->
+
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+
+  {% if template contains 'customers' %}
+  {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+  {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  
+  {% include 'buddha-megamenu' %}
+  {{ content_for_header }}
+
+	{% include 'magic360.headers' %}
+	{% include "tabarnapp_cm" %}
+  
+  
+</head>
+<a id="skipToMainContent" href="#content">Skip to Main Content</a>
+<body class="gridlock shifter {% if template contains 'product' %}product{% elsif template contains 'collection' %}collection{% else %}{{ template }}{% endif %}">
+  <!--  -->
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJ7FZMK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  {% include 'timber-cart' %}
+  {% section 'mobile-navigation' %}
+  <div class="shifter-page{% if settings.ajax_cart_method == 'drawer' %} is-moved-by-drawer{% endif %}" id="PageContainer">
+    <div class="page-wrap">
+      {% section 'header' %}
+      <div class="clear"></div>
+      {% if template contains 'collection' %}
+        {% if collection.description contains '[banner]' %}
+          {% capture banner %}{{ collection.handle }}.jpg{% endcapture %}
+          <div class="collection-banner">
+            {% include 'collection-banner-image' %}
+          </div>
+        {% endif %}
+      {% endif %}
+
+
+      {% if template == 'index' or template contains 'blog' or template contains 'list-collections' %}
+        <style>#content{margin-top:0!important;}</style>
+      <div data-page-content id="content">
+      	{{ content_for_layout }}
+<limespot></limespot>
+      </div>
+      {% else %}
+      
+      {% if collection.title == "Back to Work Sale" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TNG-108_Summer_Sale-3-Dress_Rubbers-LP_Banner-export.jpg?v=1662061869);">
+      	</div>
+      {% endif %}
+      
+      {% if collection.title == 'Pilot G2' %}
+      <div class="collection-banner hi-vis" style="background-image: url({{ 'Pilot-G2-Launch_LPBanner.jpg' | asset_img_url: 'master' }});">
+
+      </div>
+      {% endif %}
+      {% if collection.title == 'High Visibility Shirts' or collection.title == 'Safety Shirts' %}
+      <div class="collection-banner hi-vis" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/hi-vis-banner.jpg?v=1613679031);">
+        Cool. Calm. Protected.
+      </div>
+      {% endif %}
+      {% if collection.title == 'Overshoes & Overboots' or page.title == 'Overshoes & Overboots'%}
+      <div class="collection-banner overshoe" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Overshoes-2022-LP-Banner.jpg?v=1652799288);">
+        <a href="https://www.tingleyrubber.com/pages/over-the-shoe-footwear-infographic" target="_blank">Wear your shoes. Protect them with Tingley. Get the Guide</a>
+      </div>
+      {% endif %}
+      {% if page.title == 'overshoe overboot dev pag'%}
+      <div class="collection-banner overshoe" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Overshoes-2022-LP-Banner.jpg?v=1652799288);">
+        <a href="https://www.tingleyrubber.com/pages/over-the-shoe-footwear-infographic" target="_blank">Wear your shoes. Protect them with Tingley. Get the Guide</a>
+      </div>
+      {% endif %}
+      {% if collection.title == 'Slip Resistant Boots' or page.title == 'Slip Resistant Boots'%}
+      <div class="collection-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Slip-Resistant-Boot-LP-Banner.jpg?v=1643834879);">
+        Set the standard for Slip Resistance
+      </div>
+      {% endif %}
+      {% if collection.title == 'XXS/XS Safety Vests'%}
+      <div class="collection-banner xxs-vests" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/xxs-vest-banner.jpg?4214);">
+        BIG visibility now comes in smaller sizes
+      </div>
+      {% endif %}
+      {% if collection.title == "Father's Day Sale"%}
+      <div class="collection-banner fathers-day" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/fathers-day-banner.jpg?4586);">
+        FATHER’S DAY SALE. 10% OFF +FREE SHIPPING
+      </div>
+      {% endif %}
+      {% if collection.title == "Pulsar"%}
+      <div class="collection-banner pulsar" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/pulsar-banner.jpg?5804);">
+        Introducing the Pulsar PVC boot
+      </div>
+      {% endif %}
+      {% if collection.title == "Dress Rubber Overshoes"%}
+      <div class="collection-banner pulsar" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TNG-054-Flash-Sale-Dress-Rubber-Overshoes_Banner_V1.3_02.jpg?v=1600355240);">
+        Dress Rubber Overshoes Protect Your Shoes with Style
+      </div>
+      {% endif %}
+      {% if collection.title == "High Visibility Clothing" or collection.title == "Job Sight" or collection.title == "ANSI 107 Clothing"%}
+      <div class="collection-banner hi-vis-apparel" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/hi-vis-banner_1e034072-5d85-47bf-9804-322902a69d0f.jpg?5829);">
+        <a href="https://www.tingleyrubber.com/pages/the-ultimate-high-visibility-apparel-guide" target="_blank">Stay Seen. Stay safe. GET THE GUIDE</a>
+      </div>
+      {% endif %}
+      {% if collection.title == "Top Safety Sellers"%}
+      <div class="collection-banner hi-vis-apparel" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Hero2x_2x_46d139b1-3536-4f7e-9d59-53bca5383a7e.png?v=1653579984);">
+      </div>
+      {% endif %}
+      {% if page.title == 'Shop All Products'%}
+      <div class="collection-banner shop-all" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/shop-all-banner.jpg?4202);">
+        keep safe &amp; work on
+      </div>
+      {% endif %}
+      {% if page.title == 'Americana'%}
+      <div class="collection-banner americana" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-americana.jpg?5237);">
+        4th of july sale 10% OFF  |  100% Waterproof American, Eagle™, Iron Eagle® and Flite® with promo code JULY4TH
+      </div>
+      {% endif %}
+      {% if page.title == 'Decorators' or page.title == 'Distributors' %}
+      <div class="collection-banner decorators" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/decorators-banner.jpg?6118);">
+        Tingley Works for You.
+      </div>
+      {% endif %}
+      {% if collection.title == 'Iron Eagle' %}
+      	<div class="collection-banner iron-eagle" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-iron-eagle.jpg?6329);">
+          <a href="https://www.youtube.com/watch?v=wvje_fRF2Aw" class="fancybox-media">New Features. More Function. Watch Demo</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Airgo' %}
+      	<div class="collection-banner airgo" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/airgo-banner.jpg?7729);">
+          <a href="https://www.youtube.com/watch?v=xZqJvGLBsiQ" class="fancybox-media">Ultralight Comfort From knee to toe. Watch Demo</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Profile' %}
+      	<div class="collection-banner airgo" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/july-4th-banner.jpg?v=1593539634);">
+          <a href="https://www.youtube.com/watch?v=EvEswcBGEr8" class="fancybox-media">Watch Demo</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Winter Gear' %}
+      	<div class="collection-banner winter" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/winter-banner.jpg?8538);">
+          <a href="https://www.youtube.com/watch?v=xnmhQCiGvdk" class="fancybox-media">Show Winter Who’s Boss. Watch Demo</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Orion' %}
+      	<div class="collection-banner orion" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-orion.jpg?v=1579721012);">
+          <a href="https://www.youtube.com/watch?v=xnmhQCiGvdk" class="fancybox-media">Overcome Winter’s Worst with Orion Overshoes. Watch Demo</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Badger Boots' %}
+      	<div class="collection-banner badger" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/badger-banner.jpg?8471);">
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Flame Resistant Clothing' or collection.title == "ASTM F1891 Clothing" or collection.title == "ASTM F2733 Clothing" or collection.title == "NFPA 70E Clothing" %}
+      	<div class="collection-banner sync-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TNG-067-Infographic-Campaign_FR-Clothing-Landing-Banner_V1.1_03.jpg?v=1611611295);">
+          <a href="/pages/the-ultimate-flame-resistant-apparel-guide">Electrical Safety Hazard Protection - Get the Guide</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'SYNC System' %}
+      	<div class="collection-banner sync-banner" style="background-image: url({{ 'SYNCSystem_LPBanner_Collection.jpg' | file_img_url: '2596x', format: 'pjpg' }});">
+          <a href="https://www.youtube.com/watch?v=pkv7ohQwZO0" class="fancybox-media">Build YOUR Ultimate Jacket</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'SYNC System Shells' %}
+      	<div class="collection-banner sync-banner" style="background-image: url({{ 'SYNCSystem_LPBanner_Shells.jpg' | file_img_url: '2596x', format: 'pjpg' }});">
+          <a href="https://www.youtube.com/watch?v=pkv7ohQwZO0" class="fancybox-media">Build YOUR Ultimate Jacket</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'SYNC System Liners' %}
+      	<div class="collection-banner sync-banner" style="background-image: url({{ 'SYNCSystem_LPBanner_Liners.jpg' | file_img_url: '2596x', format: 'pjpg' }});">
+          <a href="https://www.youtube.com/watch?v=pkv7ohQwZO0" class="fancybox-media">Build YOUR Ultimate Jacket</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == 'X-Back' %}
+      	<div class="collection-banner xback-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/xback-banner-v2.jpg?v=1577716024);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Not Fooling Around Sale' %}
+      	<div class="collection-banner flash-sale-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Not-Fooling-Around-LP-Banner.jpg?v=1648665102)">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Top Picks for Mom' %}
+      	<div class="collection-banner flash-sale-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Mother_s-Day-LP-Banner.jpg?v=1651263452)">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Kids Safety Footwear' %}
+      	<div class="collection-banner kids-footwear-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/kids-banner.jpg?v=1585248499);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == 'Weather-Tuff' %}
+      	<div class="collection-banner weather-tuff-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-weather-tuff_noreg.jpg?v=1675364483);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Women's Top Picks" %}
+      	<div class="collection-banner womens-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-mothersday_948e7f0b-abc3-424a-abdb-3bb9c8f2c517.jpg?v=1588692241);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Spring Into Summer" %}
+      	<div class="collection-banner spring-sale-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-spring-shirts.jpg?v=1589996917);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Father's Day Collection" %}
+      	<div class="collection-banner fathers-day-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Father_s-Day-LP-Banner.jpg?v=1654546219);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Class 1 Type O Apparel" %}
+      	<div class="collection-banner spring-sale-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Type-O-LP-Banner.jpg?v=1657138355);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Job Sight FR" or collection.title == "ASTM F1506"%}
+      	<div class="collection-banner jobsight-fr-banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TNG-067-Infographic-Campaign_Job-Sight-Banner_V1.1_02.jpg?v=1611611503);">
+          <a href="/pages/the-ultimate-flame-resistant-apparel-guide">Job Sight FR - When Work Demands More Protection - Get the Guide</a>
+      	</div>
+      {% endif %}
+      {% if collection.title == "Pylon" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/banner-pylon.jpg?v=1595941528);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Safety Sweatshirts" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TNG-058-Sweatshirts_Banner_V1.3_02.jpg?v=1602859109);">
+          
+      	</div>
+      {% endif %}
+      {% if collection.title == "Workreation" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TNG-073_Reversible_Vest_Banner.jpg?v=1616618194);">
+      	</div>
+      {% endif %}
+      
+      {% if collection.title == "All-Purpose Rainwear" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Hero.png?v=1619463967);">
+      	</div>
+      {% endif %}
+      
+      {% if collection.title == "Black Friday Sale 2021" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Black-Friday-2021-LP-Banner.jpg?v=1636752735);">
+      	</div>
+      {% endif %}
+      
+      {% if collection.title == "Tingley Safety Vests" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Saftey-Vests-LP-Banner.jpg?v=1650377926);">
+           <a href="https://www.youtube.com/watch?v=iMvSaUuI0Nc" class="fancybox-media">Watch Demo</a>
+      	</div>
+      {% endif %}
+      
+       {% if collection.title == "Not Fooling Around Sale - PPD Distributors" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Not-Fooling-LP-Banner-PPD.jpg?v=1648748848);">
+           
+      	</div>
+      {% endif %}
+
+      {% if page.title == "Farm & AG Workwear" or collection.title == "Boots & Overshoes" or collection.title == "Waterproof Outerwear" or collection.title == "Hi Visibility Workwear" or collection.title == "Fleece, Hoodies and Insulated Jackets" %}
+      	<div class="collection-banner pylon" title="Farm & AG Workwear" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/FarmAG-LP-Banner_639a76e1-ffad-42a9-9f14-3a8cc7e2a088.jpg?v=1660766621);">
+           
+      	</div>
+      {% endif %}
+      {% if page.title == "Construction Workwear" or collection.title == "Construction Boots & Overshoes" or collection.title == "Construction Waterproof Outerwear" or collection.title == "Construction Hi-Vis Apparel"%}
+      	<div class="collection-banner pylon" title="Construction Workwear" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Construction-Workwear-LP-Banner.jpg?v=1665598639);">
+           
+      	</div>
+      {% endif %}
+       {% if collection.title == "Scary Savings for Spooky Season" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Scary-Savings-LP-Banner.jpg?v=1666627665);">
+           
+      	</div>
+      {% endif %}
+       {% if collection.title == "Black Friday Sale" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Black-Friday-2022-LP-Banner_1.jpg?v=1669049196);">
+      	</div>
+      {% endif %}
+        
+      {% if page.title == "Gift Guide" %}
+      	<div class="collection-banner pylon" title="Gift Guide Banner" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Holiday-Gift-Guide-2022-LP-Banner.jpg?v=1670427486);">     
+      	</div>
+      {% endif %}
+        
+       {% if collection.title == "Winter Overshoes" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Hero_2x_aa6a7e58-0175-47e6-bc8a-42d68d366786.png?v=1673630857);">
+      	</div>
+      {% endif %}
+
+      {% if collection.title == "Bomber Jackets" %}
+      	<div class="collection-banner pylon" style="background-image: url(https://cdn.shopify.com/s/files/1/0085/7807/2634/files/Bomber-Jackets-LP-Banner.jpg?v=1675708332);">
+      	</div>
+      {% endif %}
+        
+        
+      
+      
+      
+      
+      <div id="content" class="row">
+        {% if template != 'index' and template != 'page.infographic' %}
+          {% if settings.breadcrumb %}
+            {% include 'breadcrumb' %}
+          {% endif %}
+        {% endif %}
+        <div data-page-content>
+          {{ content_for_layout }}
+<limespot></limespot>
+        </div>
+      </div>
+      {% endif %}
+    </div>  <!-- close the page-wrap class -->
+    {% section 'footer' %}
+  </div> <!-- close the shifter-page class -->
+
+
+  {% include 'popup' %}
+
+  <a href="#" class="scrollup"><i class="icon-chevron-up icon-2x"></i></a>
+
+  <!-- Begin Recently Viewed Products -->
+  <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+    // Including api.jquery.js conditionnally.
+    if (typeof Shopify.resizeImage === 'undefined') {
+      document.write({{ "api.jquery.js" | shopify_asset_url | script_tag | json }});
+    }
+    //]]>
+  </script>
+  {{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+  {{ 'jquery.products.min.js' | asset_url | script_tag }}
+
+  {% if template contains 'product' %}
+  <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+    Shopify.Products.recordRecentlyViewed();
+    //]]>
+    $('input, textarea').placeholder();
+  </script>
+  {% endif %}
+  {% if settings.show-facebook-like %}
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=127142210767229";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  {% endif %}
+
+  {% if settings.ajax_cart_method == 'drawer' %}
+    {{ 'handlebars.min.js' | asset_url | script_tag }}
+    {% include 'ajax-cart-template' %}
+    {{ 'ajax-cart.js' | asset_url | script_tag }}
+    <script>
+      jQuery(function($) {
+        ajaxCart.init({
+          formSelector: '.product_form',
+          cartContainer: '#CartContainer',
+          addToCartSelector: '.AddtoCart',
+          cartCountSelector: '.CartCount',
+          cartCostSelector: '.CartCost',
+          moneyFormat: {{ shop.money_format | json }}
+       });
+      });
+      jQuery('body').on('ajaxCart.afterCartLoad', function(evt, cart) {
+        // Bind to 'ajaxCart.afterCartLoad' to run any javascript after the cart has loaded in the DOM
+        timber.RightDrawer.open();
+      });
+      {% if settings.show_multiple_currencies %}
+        jQuery('body').on('ajaxCart.afterCartLoad', function(evt, cart) {
+          // Convert currency when ajaxcart opens
+          Currency.convertAll(shopCurrency, Currency.currentCurrency);
+        });
+      {% endif %}
+    </script>
+  {% endif %}
+
+  <!-- Responsive Images -->
+  {{ 'ls.rias.min.js' | asset_url | script_tag }}
+  {{ 'ls.bgset.min.js' | asset_url | script_tag }}
+  {{ 'lazysizes.min.js' | asset_url | script_tag }}
+  
+  {{ 'slick.min.js' | asset_url | script_tag }}
+
+  <script>
+      document.documentElement.className =
+         document.documentElement.className.replace("no-js","js");
+  </script>
+  
+  <script>
+    (function($){
+      if($(".hero-slider").length > 0){
+        $('.hero-slider').slick({
+          autoplay: true,
+          autoplaySpeed: 5000,
+          appendArrows: $(".arrows"),
+          prevArrow: '<button class="arrow arrow-left"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.23 154.57"><defs><style>.cls-1{fill:#fff;opacity:0.7;}</style></defs><path class="cls-1" d="M6.11,82.31C4.34,78.7,4.22,75.78,6,72.11,6.33,71.48,39.2,3.27,39.2,3.27A1.8,1.8,0,1,0,36,1.71S3.7,68.9,2.32,71.72C.47,75.5.37,78.6,2.25,82.42c3.66,7.47,33.71,70,33.71,70a1.8,1.8,0,1,0,3.24-1.55Z"/></svg></button>',
+          nextArrow: '<button class="arrow arrow-right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.23 154.57"><defs><style>.cls-1{fill:#fff;opacity:0.7;}</style></defs><path class="cls-1" d="M34.16,82.31c1.77-3.61,1.89-6.53.09-10.2C33.94,71.48,1.06,3.27,1.06,3.27A1.8,1.8,0,1,1,4.31,1.71S36.56,68.9,38,71.72c1.85,3.78,1.95,6.88.07,10.7-3.67,7.47-33.71,70-33.71,70a1.79,1.79,0,0,1-1.63,1,1.76,1.76,0,0,1-.77-.17,1.8,1.8,0,0,1-.85-2.4Z"/></svg></button>'
+        });
+      }
+    })(jQuery)
+  </script>
+  <!-- Add any additional scripts below this line -->
+{% include 'back-in-stock-helper' %}
+{% include 'geolizr-popup' %}
+  <script type='text/javascript' async src='https://spcdn.incartupsell.com/gjgjj-Cqz8rrVXTzssrmRaXyX4.js'></script>
+
+<!-- spurit_isr-added -->
+{% if template == 'product' %}
+  {% render 'spurit_isr-product-snippet' %}
+{% endif %}
+<!-- /spurit_isr-added -->
+
+</body>
+</html>
