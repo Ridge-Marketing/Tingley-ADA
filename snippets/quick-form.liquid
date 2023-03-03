@@ -1,7 +1,7 @@
 <form action="/cart/add" method="post" data-money-format="{{ shop.money_format }}" data-option-index="{{ option_index }}" enctype="multipart/form-data" class="product_form" id="AddToCartForm">
   {% if product.options.size > 1 %}
   <div class="select">
-    <select id="product-select-{{ product.id }}" name='id'>
+    <select aria-label="Select Variant" id="product-select-{{ product.id }}" name='id'>
       {% for variant in product.variants %}
       <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
       {% endfor %}
@@ -9,7 +9,7 @@
   </div>
   {% elsif product.options.size == 1 and product.variants.size > 1 %}
   <div class="select">
-    <label>{{ product.options[0] }}</label>
+    <label for="product-select-{{ product.id }}>{{ product.options[0] }}</label>
     <select id="product-select-{{ product.id }}" name='id'>
       {% for variant in product.variants %}
       <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>

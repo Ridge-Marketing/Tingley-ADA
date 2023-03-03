@@ -47,7 +47,7 @@
     </div>
   </div>
   
-  <select id="product-select-{{ product.id }}" name="id" class="single-option-selector product-select" onchange="getSelectedValue()">
+  <select aria-label="Select Variant" id="product-select-{{ product.id }}" name="id" class="single-option-selector product-select" onchange="getSelectedValue()">
     {% for variant in product.variants %}	
     <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" {% if variant == current_variant %}selected="selected"{% endif %}>
       {{ variant.title }} - {{ variant.price | money }}{% if variant.available == false %} - Out of Stock{% endif %}

@@ -16,7 +16,7 @@
   <div id="search-bar" class="desktop-12 mobile-3">
     <form action="/search" method="get">
       <p>{{ 'general.search.results_for_html' | t: terms: search.terms }}</p>
-      <input type="text" name="q" id="q" placeholder="{{ 'general.search.placeholder' | t }}" />
+      <input aria-label="Search" type="text" name="q" id="q" placeholder="{{ 'general.search.placeholder' | t }}" />
     </form>
   </div>
 

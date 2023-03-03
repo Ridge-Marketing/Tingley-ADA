@@ -25,10 +25,10 @@
       {% if collection %}
         <div class="product-navigation">
           {% if collection.previous_product %}
-            {{ '<i class="fa fa-angle-left" aria-hidden="true"></i>' | link_to: collection.previous_product }}
+            {{ '<i class="fa fa-angle-left" aria-hidden="true"></i>' | link_to: collection.previous_product | link_to_type: aria-label: 'Previous Product' }}
           {% endif %}
           {% if collection.next_product %}
-            {{ '<i class="fa fa-angle-right" aria-hidden="true"></i>' | link_to: collection.next_product }}
+            {{ '<i class="fa fa-angle-right" aria-hidden="true"></i>' | link_to: collection.next_product | link_to_type: aria-label: 'Next Product' }}
           {% endif %}
         </div>
       {% endif %}

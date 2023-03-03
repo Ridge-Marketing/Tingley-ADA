@@ -31,7 +31,7 @@
 
   {% if product.options.size > 1 %}
     <div class="select" {% if product.variants.size == 1 or section.settings.product_variants == 'swatches' %}style="display: none;"{% endif %}>
-      <select id="product-select-{{ product.id }}" name='id'>
+      <select aria-label="Select Variant" id="product-select-{{ product.id }}" name='id'>
         {% for variant in product.variants %}	
         <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
           {{ variant.title }} - {{ variant.price | money }}
@@ -46,7 +46,7 @@
     {% endif %}
     {% elsif product.options.size == 1 and product.variants.size > 1 %}
       <div class="select" {% if section.settings.product_variants == 'swatches' %}style="display: none;"{% endif %}>
-        <label>{{ product.options[0] }}</label>
+        <label for="product-select-{{ product.id }}>{{ product.options[0] }}</label>
         <select id="product-select-{{ product.id }}" name="id" class="single-option-selector dropdown-option">
      
           {% for variant in product.variants %}
@@ -62,7 +62,7 @@
         {% endfor %}
       {% endif %}
     {% elsif product.variants.size == 1 %}
-      <select id="product-select-{{ product.id }}" name="id" {% if product.variants.size == 1 or section.settings.product_variants == 'swatches' %}style="display: none;"{% endif %} class="single-option-selector dropdown-option">
+      <select aria-label="Select Variant" id="product-select-{{ product.id }}" name="id" {% if product.variants.size == 1 or section.settings.product_variants == 'swatches' %}style="display: none;"{% endif %} class="single-option-selector dropdown-option">
         {% for variant in product.variants %}
           <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
             {{ variant.title }} - {{ variant.price | money }}

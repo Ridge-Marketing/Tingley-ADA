@@ -58,7 +58,7 @@
             {% if forloop.index0 < still_images_count %}
             <div data-slide-id="image-{{ forloop.index0 }}" class="MagicToolboxSlide" style="position:relative">
               {% comment %}
-                <img alt="{{ image.alt }}" src="{{ image | product_img_url: MagicToolboxThumbnailImageSize }}" />
+                <img alt="{{ image.alt | escape }}" src="{{ image | product_img_url: MagicToolboxThumbnailImageSize }}" />
               {% endcomment %}
               
         <a class="product-fancybox fancybox" rel="product-images"  href="{{ image | img_url: '2400x' }}">
