@@ -8,7 +8,7 @@
   {% endif %}
   {% for part in paginate.parts %}
     {% if part.is_link %}
-      {{ part.title | link_to: part.url }}
+      {{ part.title | link_to: part.url | link_to_type: aria-label: part.title }}
     {% else %}
       {% if part.title == '&hellip;' %}
         <span class="more">{{ part.title }}</span>

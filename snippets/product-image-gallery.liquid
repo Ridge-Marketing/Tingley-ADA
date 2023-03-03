@@ -23,10 +23,10 @@
             data-src="{{ img_url }}"
             data-sizes="auto"
             data-zoom-src="{{ image | img_url: '2400x' }}"
-            alt="{{ image.alt | escape }}">
+            alt="{{ image.alt | escape }} product image {{ forloop.index }}">
         </a>
         <noscript>
-          <img id="{{ product.id }}" class="product-main-image" src="{{ featured_image | product_img_url: '800x' }}" alt='{{ image.alt | escape }}'/>
+          <img id="{{ product.id }}" class="product-main-image" src="{{ featured_image | product_img_url: '800x' }}" alt=''/>
         </noscript>
       </div>
     {% endfor %}

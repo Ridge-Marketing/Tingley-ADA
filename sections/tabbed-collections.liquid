@@ -35,7 +35,7 @@
           {%- assign col_limit = section.settings.homepage_collection_limit -%}
           {% for product in collection.products limit: col_limit %}
           <div class="product-car">
-            <div id="product-listing-{{ product.id }}" class="product-index" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+            <div id="product-listing-{{ product.id }}" class="product-index" data-alpha="{{ product.title | escape }}" data-price="{{ product.price }}">
               {% include 'product-listing' with collection %}
             </div>
           </div>

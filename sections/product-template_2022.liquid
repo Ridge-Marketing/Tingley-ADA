@@ -110,14 +110,14 @@
               <img class="hide--mobile" style="width: 100%;" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TINGLEY-HomeBanner-Free_Ship_50.jpg?v=1677250654" alt="Free Shipping Over $50. Enter code FREESHIP50 at checkout." />
               <img class="hide--desktop" style="width: 100%;" src="https://cdn.shopify.com/s/files/1/0085/7807/2634/files/TINGLEY-HomeBanner-Free_Ship_50.jpg?v=1677250654" alt="" />
             {% elsif product.metafields.c1_promo_banner.link_url.value == 'https://null' %} 
-              <img class="hide--mobile" style="width: 100%;" src="{{product.metafields.c2_promo_banner.image_url}} alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
-              <img class="hide--desktop" style="width: 100%;" src="{{product.metafields.c3_promo_banner.image_url_mobile}} alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+              <img class="hide--mobile" style="width: 100%;" src="{{product.metafields.c2_promo_banner.image_url}}" alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+              <img class="hide--desktop" style="width: 100%;" src="{{product.metafields.c3_promo_banner.image_url_mobile}}" alt="" />
             {% else %} 
               <a href={{product.metafields.c1_promo_banner.link_url}} target="_blank" class="hide--mobile" style=" width: 100%; text-align:center;">
                 <img style="width: 100%;" src="{{product.metafields.c2_promo_banner.image_url}}" alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
               </a>
               <a href={{product.metafields.c1_promo_banner.link_url}} target="_blank" class="hide--desktop" style=" width: 100%; text-align:center;">
-                <img style="width: 100%;" src="{{product.metafields.c3_promo_banner.image_url_mobile}}" alt="{{product.metafields.c4_promo_banner.image_alt_text}}" />
+                <img style="width: 100%;" src="{{product.metafields.c3_promo_banner.image_url_mobile}}" alt="" />
               </a>
           {% endif %}
 
@@ -147,7 +147,7 @@
               <iframe id="{{product.id}}-yt-video" src="{{product.metafields.e2_content.media_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
               {% else %}
               <a href="{{product.metafields.e2_content.media_url}}" data-lity>
-                <img src={{product.metafields.e2_content.media_url}} alt="Ideal Applications Image" />
+                <img src="{{product.metafields.e2_content.media_url}}" alt="Ideal Applications Image" />
               </a>
               {% endif %}
             </div>

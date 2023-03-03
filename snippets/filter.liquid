@@ -2,7 +2,7 @@
  {% if section.settings.sort_by %} 
   <li class="clearfix filter">
     <p>{{ 'collections.sorting.title' | t }}</p> 
-    <select id="sort-by" class="styled-select">
+    <select id="sort-by" class="styled-select" aria-label="Sort Products By">
       <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
       <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
       <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>

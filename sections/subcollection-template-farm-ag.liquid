@@ -102,7 +102,7 @@
       <h3 style="padding-bottom: 5px;margin-bottom: 20px;border-bottom: 1px solid #e5e5e5;">Wear as Liners</h3>
       <div {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
         {% for product in liners.products %}
-            <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+            <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title | escape }}" data-price="{{ product.price }}">
               {% include 'product-listing' %}
             </div>
         {% endfor %}
@@ -111,7 +111,7 @@
       <h3 style="padding-bottom: 5px;margin-bottom: 20px;border-bottom: 1px solid #e5e5e5;">Wear as Shells</h3>
       <div {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
         {% for product in shells.products %}
-            <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+            <div id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title | escape }}" data-price="{{ product.price }}">
               {% include 'product-listing' %}
             </div>
         {% endfor %}
@@ -124,7 +124,7 @@
       {% assign products-per-row = section.settings.products_per_row %}
       {% if collection.products_count > 0 %}
         {% for product in collection.products %}
-          <div  id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+          <div  id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title | escape }}" data-price="{{ product.price }}">
             {% include 'product-listing' %}
           </div>
         {% endfor %}
@@ -143,7 +143,7 @@
       <div id="product-loop" {% if section.blocks.size > 0 %}class="desktop-10 tablet-5 mobile-3"{% endif %}>
       {% assign products-per-row = section.settings.products_per_row %}  
       {% for product in collections['tingley-class-vests'].products %}
-        <div  id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+        <div  id="product-listing-{{ product.id }}" class="product-index {{ grid_item_width }}" data-alpha="{{ product.title | escape }}" data-price="{{ product.price }}">
           {% include 'product-listing' %}
         </div>
       {% endfor %}
