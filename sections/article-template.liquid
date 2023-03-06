@@ -107,7 +107,7 @@
     </div>
     <div id="pagination">
       {% if paginate.previous %}
-      {{ '<' | link_to: paginate.previous.url  | link_to_type: aria-label: 'Previous Page' }}
+      {{ '<' | link_to: paginate.previous.url, aria-label: "Previous Page" }}
       {% endif %}
       {% for part in paginate.parts %}
       {% if part.is_link %}
@@ -121,7 +121,7 @@
       {% endif %}
       {% endfor %}
       {% if paginate.next %}
-      {{ '>' | link_to: paginate.next.url | link_to_type: aria-label: 'Next Page' }}
+      {{ '>' | link_to: paginate.next.url, aria-label: "Next Page" }}
       {% endif %}
     </div>
     {% endif %}

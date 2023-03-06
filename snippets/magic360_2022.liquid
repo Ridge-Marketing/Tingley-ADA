@@ -65,7 +65,7 @@
           <img id="{{ product.id }}" class="product__image"
             src="{{ image | product_img_url: MagicToolboxThumbnailImageSize }}"
             data-zoom-src="{{ image | img_url: '2400x' }}"
-            alt="{{ image.alt | escape }}">
+            alt="{{ image.alt | escape }} image {{forloop.index}}">
         </a>
               
             </div>

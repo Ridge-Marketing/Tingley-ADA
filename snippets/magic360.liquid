@@ -65,7 +65,7 @@
           <img id="{{ product.id }}" class="product__image"
             src="{{ image | product_img_url: MagicToolboxThumbnailImageSize }}"
             data-zoom-src="{{ image | img_url: '2400x' }}"
-            alt="{{ image.alt | escape }}">
+            alt="{{ image.alt | escape }} image {{forloop.index}}">
         </a>
               
             </div>
@@ -85,7 +85,7 @@
                 {% endfor %}
           
                 <a data-variant-id="{{ product_variants }}" data-slide-id="image-{{ forloop.index0 }}" href="#">
-                    <img alt="{{ image.alt }}" src="{{ image | product_img_url: MagicToolboxSelectorImageSize }}" />
+                    <img alt="{{ image.alt | escape }}" src="{{ image | product_img_url: MagicToolboxSelectorImageSize }}" />
                 </a>
                 {% endif %}
             {% endfor %}
